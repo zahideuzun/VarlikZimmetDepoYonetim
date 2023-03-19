@@ -63,6 +63,37 @@ namespace VarlikZimmetDepoYonetim.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blue_search_icon {
+            get {
+                object obj = ResourceManager.GetObject("blue-search-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap indir {
+            get {
+                object obj = ResourceManager.GetObject("indir", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_transparent_announce_megaphone_icon_megaphone_icon_announcement_icon_symbol_announcement_communication_marketing_speaker_thumbnail {
+            get {
+                object obj = ResourceManager.GetObject("png-transparent-announce-megaphone-icon-megaphone-icon-announcement-icon-symbol-a" +
+                        "nnouncement-communication-marketing-speaker-thumbnail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_10 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot_10", resourceCulture);
