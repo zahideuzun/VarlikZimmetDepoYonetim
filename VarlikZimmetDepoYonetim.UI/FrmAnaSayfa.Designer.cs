@@ -41,9 +41,6 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.varlıkToolStripMenuItem,
-            this.raporlamaToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -53,9 +50,6 @@
 			// 
 			// varlıkToolStripMenuItem
 			// 
-			this.varlıkToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.varlıklarıGösterToolStripMenuItem,
-            this.varlıklarıGüncelleToolStripMenuItem});
 			this.varlıkToolStripMenuItem.Name = "varlıkToolStripMenuItem";
 			this.varlıkToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
 			this.varlıkToolStripMenuItem.Text = "Varlık";
@@ -64,7 +58,7 @@
 			// 
 			this.varlıklarıGösterToolStripMenuItem.Name = "varlıklarıGösterToolStripMenuItem";
 			this.varlıklarıGösterToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.varlıklarıGösterToolStripMenuItem.Text = "Varlıkları Göster";
+			this.varlıklarıGösterToolStripMenuItem.Text = "productsList";
 			// 
 			// varlıklarıGüncelleToolStripMenuItem
 			// 
@@ -84,13 +78,13 @@
 			// rapor1ToolStripMenuItem
 			// 
 			this.rapor1ToolStripMenuItem.Name = "rapor1ToolStripMenuItem";
-			this.rapor1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.rapor1ToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
 			this.rapor1ToolStripMenuItem.Text = "Rapor1";
 			// 
 			// rapor2ToolStripMenuItem
 			// 
 			this.rapor2ToolStripMenuItem.Name = "rapor2ToolStripMenuItem";
-			this.rapor2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.rapor2ToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
 			this.rapor2ToolStripMenuItem.Text = "Rapor2";
 			// 
 			// FrmAnaSayfa

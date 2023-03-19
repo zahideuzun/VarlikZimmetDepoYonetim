@@ -33,6 +33,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.btnLogin = new System.Windows.Forms.Button();
+			this.cbShowPassword = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// tbUserMailAddress
@@ -82,12 +83,26 @@
 			this.btnLogin.UseVisualStyleBackColor = false;
 			this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
 			// 
+			// cbShowPassword
+			// 
+			this.cbShowPassword.AutoSize = true;
+			this.cbShowPassword.Location = new System.Drawing.Point(486, 404);
+			this.cbShowPassword.Name = "cbShowPassword";
+			this.cbShowPassword.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+			this.cbShowPassword.Size = new System.Drawing.Size(88, 17);
+			this.cbShowPassword.TabIndex = 3;
+			this.cbShowPassword.Text = "Şifreyi Göster";
+			this.cbShowPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			this.cbShowPassword.UseVisualStyleBackColor = true;
+			this.cbShowPassword.CheckedChanged += new System.EventHandler(this.cbShowPassword_CheckedChanged);
+			// 
 			// FrmGirisEkrani
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackgroundImage = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.Screenshot_11;
 			this.ClientSize = new System.Drawing.Size(664, 462);
+			this.Controls.Add(this.cbShowPassword);
 			this.Controls.Add(this.btnLogin);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -107,5 +122,6 @@
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Button btnLogin;
+		private System.Windows.Forms.CheckBox cbShowPassword;
 	}
 }

@@ -11,6 +11,7 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public int ProductId { get; set; }
 		public Guid ProductBarcode { get; set; }
 		public ProductGroup ProductGroup { get; set; }
+		public double Price { get; set; }
 		public ProductType ProductType { get; set; }
 		public Brand Brand { get; set; }
 		public Model Model { get; set; }

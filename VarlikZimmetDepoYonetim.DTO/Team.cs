@@ -8,15 +8,11 @@ namespace VarlikZimmetDepoYonetim.DTO
 {
 	public class Team
 	{
-		public class Team
-		{
-			public int TeamId { get; set; }
+		public int TeamId { get; set; }
 			public string TeamName { get; set; }
 			public Company Company { get; set; }
 			public bool IsActive { get; set; }
-		}
-
-
+		
 
 	}
 }

@@ -16,5 +16,6 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			InitializeComponent();
 		}
+
 	}
 }

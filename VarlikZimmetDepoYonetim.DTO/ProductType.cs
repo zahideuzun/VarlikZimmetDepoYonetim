@@ -10,6 +10,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 	{
 		public int ProductTypeId { get; set; }
 		public string ProductTypeName { get; set; }
+		public override string ToString()
+		{
+			return ProductTypeName;
+		}
 	}
 
 }

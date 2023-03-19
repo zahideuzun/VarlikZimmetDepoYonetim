@@ -13,7 +13,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 		private SqlConnection conn;
 		private SqlCommand cmd;
 
-			public SqlProviderService(string connectionQuery, string Address= "server=.\\SQLEXPRESS;database=ETrade8438;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
+			public SqlProviderService(string connectionQuery, string Address= "server=.\\SQLEXPRESS;database=VarlikZimmetDepo;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
 			{
 				conn = new SqlConnection(Address);
 				cmd = new SqlCommand();
