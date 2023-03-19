@@ -45,12 +45,17 @@
     <Compile Include="IRepo\IInsertRepo.cs" />
     <Compile Include="IRepo\ISelectRepo.cs" />
     <Compile Include="IRepo\IUpdateRepo.cs" />
+    <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VarlikZimmetDepoYonetim.DTO\VarlikZimmetDepoYonetim.DTO.csproj">
       <Project>{89707535-A36C-4AF0-A9AC-D8C556BDFC36}</Project>
       <Name>VarlikZimmetDepoYonetim.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VarlikZimmetDepoYonetim.Provider\VarlikZimmetDepoYonetim.Provider.csproj">
+      <Project>{D6A47BDE-9845-4A65-A835-0BD55BF3C7D6}</Project>
+      <Name>VarlikZimmetDepoYonetim.Provider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

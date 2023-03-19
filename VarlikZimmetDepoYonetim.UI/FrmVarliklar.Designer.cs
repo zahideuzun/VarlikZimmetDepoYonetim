@@ -31,7 +31,7 @@
 			this.tb = new System.Windows.Forms.TextBox();
 			this.btnYeniKayit = new System.Windows.Forms.Button();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dgvProducts = new System.Windows.Forms.DataGridView();
 			this.label1 = new System.Windows.Forms.Label();
 			this.lblMyProducts = new System.Windows.Forms.Label();
 			this.lblTeamProducts = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -72,13 +72,13 @@
 			this.comboBox1.Size = new System.Drawing.Size(163, 21);
 			this.comboBox1.TabIndex = 3;
 			// 
-			// dataGridView1
+			// dgvProducts
 			// 
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Location = new System.Drawing.Point(161, 154);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(564, 326);
-			this.dataGridView1.TabIndex = 4;
+			this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvProducts.Location = new System.Drawing.Point(161, 154);
+			this.dgvProducts.Name = "dgvProducts";
+			this.dgvProducts.Size = new System.Drawing.Size(564, 326);
+			this.dgvProducts.TabIndex = 4;
 			// 
 			// label1
 			// 
@@ -185,14 +185,15 @@
 			this.Controls.Add(this.lblMyProducts);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label1);
-			this.Controls.Add(this.dataGridView1);
+			this.Controls.Add(this.dgvProducts);
 			this.Controls.Add(this.comboBox1);
 			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.btnYeniKayit);
 			this.Controls.Add(this.tb);
 			this.Name = "FrmVarliklar";
 			this.Text = "FrmVarliklar";
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			this.Load += new System.EventHandler(this.FrmVarliklar_Load);
+			((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -205,7 +206,7 @@
 		private System.Windows.Forms.Button btnYeniKayit;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.ComboBox comboBox1;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView dgvProducts;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Label lblMyProducts;

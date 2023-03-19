@@ -90,7 +90,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			}
 
 			
-			public SqlDataReader ExcuteRedaer() 
+			public SqlDataReader ExecuteReader() 
 			{
 				SqlDataReader rdr = null;
 				try

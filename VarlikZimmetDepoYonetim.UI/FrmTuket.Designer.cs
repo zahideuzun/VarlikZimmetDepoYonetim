@@ -30,9 +30,10 @@
 		{
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
-			this.tbSubscriberNo = new System.Windows.Forms.TextBox();
 			this.tbDescription = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.btnConsume = new System.Windows.Forms.Button();
+			this.mtbSubscriberNo = new System.Windows.Forms.MaskedTextBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -56,13 +57,6 @@
 			this.label2.TabIndex = 0;
 			this.label2.Text = "Abone No";
 			// 
-			// tbSubscriberNo
-			// 
-			this.tbSubscriberNo.Location = new System.Drawing.Point(47, 116);
-			this.tbSubscriberNo.Name = "tbSubscriberNo";
-			this.tbSubscriberNo.Size = new System.Drawing.Size(276, 20);
-			this.tbSubscriberNo.TabIndex = 1;
-			// 
 			// tbDescription
 			// 
 			this.tbDescription.Location = new System.Drawing.Point(47, 189);
@@ -81,13 +75,35 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Açıklama";
 			// 
+			// btnConsume
+			// 
+			this.btnConsume.BackColor = System.Drawing.Color.DodgerBlue;
+			this.btnConsume.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.btnConsume.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+			this.btnConsume.Location = new System.Drawing.Point(186, 406);
+			this.btnConsume.Name = "btnConsume";
+			this.btnConsume.Size = new System.Drawing.Size(137, 32);
+			this.btnConsume.TabIndex = 5;
+			this.btnConsume.Text = "> Tüket";
+			this.btnConsume.UseVisualStyleBackColor = false;
+			// 
+			// mtbSubscriberNo
+			// 
+			this.mtbSubscriberNo.Location = new System.Drawing.Point(47, 120);
+			this.mtbSubscriberNo.Mask = "00000000";
+			this.mtbSubscriberNo.Name = "mtbSubscriberNo";
+			this.mtbSubscriberNo.Size = new System.Drawing.Size(276, 20);
+			this.mtbSubscriberNo.TabIndex = 6;
+			this.mtbSubscriberNo.ValidatingType = typeof(int);
+			// 
 			// FrmTuket
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(368, 450);
+			this.Controls.Add(this.mtbSubscriberNo);
+			this.Controls.Add(this.btnConsume);
 			this.Controls.Add(this.tbDescription);
-			this.Controls.Add(this.tbSubscriberNo);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
@@ -102,8 +118,9 @@
 
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.TextBox tbSubscriberNo;
 		private System.Windows.Forms.TextBox tbDescription;
 		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Button btnConsume;
+		private System.Windows.Forms.MaskedTextBox mtbSubscriberNo;
 	}
 }

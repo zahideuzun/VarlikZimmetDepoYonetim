@@ -52,11 +52,23 @@
     <Compile Include="FrmAnaSayfa.Designer.cs">
       <DependentUpon>FrmAnaSayfa.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDuyurular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDuyurular.Designer.cs">
+      <DependentUpon>FrmDuyurular.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmGirisEkrani.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmGirisEkrani.Designer.cs">
       <DependentUpon>FrmGirisEkrani.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSSSorular.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSSSorular.Designer.cs">
+      <DependentUpon>FrmSSSorular.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmTuket.cs">
       <SubType>Form</SubType>
@@ -87,8 +99,14 @@
     <EmbeddedResource Include="FrmAnaSayfa.resx">
       <DependentUpon>FrmAnaSayfa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmDuyurular.resx">
+      <DependentUpon>FrmDuyurular.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGirisEkrani.resx">
       <DependentUpon>FrmGirisEkrani.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSSSorular.resx">
+      <DependentUpon>FrmSSSorular.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTuket.resx">
       <DependentUpon>FrmTuket.cs</DependentUpon>
@@ -138,6 +156,14 @@
     <None Include="Resources\Screenshot_11.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VarlikZimmetDepoYonetim.DAL\VarlikZimmetDepoYonetim.DAL.csproj">
+      <Project>{F84CA2B3-84DD-4BF8-9E1A-AEC34FAE424D}</Project>
+      <Name>VarlikZimmetDepoYonetim.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VarlikZimmetDepoYonetim.DTO\VarlikZimmetDepoYonetim.DTO.csproj">
+      <Project>{89707535-A36C-4AF0-A9AC-D8C556BDFC36}</Project>
+      <Name>VarlikZimmetDepoYonetim.DTO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VarlikZimmetDepoYonetim.Provider\VarlikZimmetDepoYonetim.Provider.csproj">
       <Project>{D6A47BDE-9845-4A65-A835-0BD55BF3C7D6}</Project>
       <Name>VarlikZimmetDepoYonetim.Provider</Name>
