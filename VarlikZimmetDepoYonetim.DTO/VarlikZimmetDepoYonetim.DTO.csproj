@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Question.cs" />
     <Compile Include="Result\MyResult.cs" />
     <Compile Include="Warehouse.cs" />
     <Compile Include="Announcement.cs" />

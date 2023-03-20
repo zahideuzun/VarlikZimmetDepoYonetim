@@ -42,7 +42,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 					teamAssignments.Add(teamAssignment);
 				}
 			}
-			sqlDbService.BaglantiKapat();
+			sqlDbService.Close();
 			return teamAssignments;
 		}
 	}

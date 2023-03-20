@@ -37,7 +37,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 					products.Add(p);
 				}
 			}
-			sqlDbService.BaglantiKapat();
+			sqlDbService.Close();
 			return products;
 			
 		}

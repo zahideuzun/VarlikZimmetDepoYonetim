@@ -21,5 +21,20 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 
 		}
+
+		private void updateProductsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void announcementsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void frequentlyAskedQuestionsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

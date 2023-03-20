@@ -10,6 +10,8 @@ namespace VarlikZimmetDepoYonetim.DTO
 	{
 		public int AnnouncementId { get; set; }
 		public string AnnouncementName { get; set; }
+		public string AnnouncementDescription { get; set; }
+
 	}
 
 }

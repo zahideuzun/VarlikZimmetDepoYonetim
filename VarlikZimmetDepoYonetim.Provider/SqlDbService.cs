@@ -29,7 +29,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 		{
 			if (conn.State == ConnectionState.Closed) conn.Open();
 		}
-		public void BaglantiKapat()
+		public void Close()
 		{
 			if (conn.State == ConnectionState.Open) conn.Close();
 		}
@@ -61,7 +61,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			}
 			finally
 			{
-				BaglantiKapat();
+				Close();
 			}
 
 			return result;
@@ -111,7 +111,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			}
 			finally
 			{
-				BaglantiKapat();
+				Close();
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			}
 			finally
 			{
-				BaglantiKapat();
+				Close();
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			}
 			finally
 			{
-				BaglantiKapat();
+				Close();
 			}
 		}
 	}
