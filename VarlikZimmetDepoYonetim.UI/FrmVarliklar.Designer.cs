@@ -37,9 +37,6 @@
 			this.lblAllProducts = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.button2 = new System.Windows.Forms.Button();
-			this.button1 = new System.Windows.Forms.Button();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lstProductList = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -48,8 +45,11 @@
 			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.button2 = new System.Windows.Forms.Button();
+			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// tb
@@ -97,6 +97,7 @@
 			this.lblMyProducts.Size = new System.Drawing.Size(90, 19);
 			this.lblMyProducts.TabIndex = 7;
 			this.lblMyProducts.Text = "Varlıklarım";
+			this.lblMyProducts.Click += new System.EventHandler(this.lblMyProducts_Click);
 			// 
 			// lblTeamProducts
 			// 
@@ -141,38 +142,6 @@
 			this.label3.TabIndex = 7;
 			this.label3.Text = "Alarm";
 			// 
-			// button2
-			// 
-			this.button2.BackgroundImage = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.indir;
-			this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.button2.Location = new System.Drawing.Point(516, 34);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(40, 32);
-			this.button2.TabIndex = 9;
-			this.button2.Text = ".";
-			this.button2.UseVisualStyleBackColor = true;
-			// 
-			// button1
-			// 
-			this.button1.BackgroundImage = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.png_transparent_announce_megaphone_icon_megaphone_icon_announcement_icon_symbol_announcement_communication_marketing_speaker_thumbnail;
-			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-			this.button1.Location = new System.Drawing.Point(470, 35);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(40, 30);
-			this.button1.TabIndex = 6;
-			this.button1.Text = ".";
-			this.button1.UseVisualStyleBackColor = true;
-			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.Image = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.Screenshot_10;
-			this.pictureBox1.Location = new System.Drawing.Point(9, 32);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(126, 69);
-			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBox1.TabIndex = 2;
-			this.pictureBox1.TabStop = false;
-			// 
 			// lstProductList
 			// 
 			this.lstProductList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -204,7 +173,7 @@
 			// columnHeader3
 			// 
 			this.columnHeader3.Text = "Ürün Tipi";
-			this.columnHeader3.Width = 73;
+			this.columnHeader3.Width = 137;
 			// 
 			// columnHeader4
 			// 
@@ -214,12 +183,12 @@
 			// columnHeader5
 			// 
 			this.columnHeader5.Text = "Marka";
-			this.columnHeader5.Width = 88;
+			this.columnHeader5.Width = 84;
 			// 
 			// columnHeader6
 			// 
 			this.columnHeader6.Text = "Model";
-			this.columnHeader6.Width = 86;
+			this.columnHeader6.Width = 101;
 			// 
 			// groupBox1
 			// 
@@ -233,6 +202,38 @@
 			this.groupBox1.TabIndex = 11;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = ".";
+			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.Screenshot_10;
+			this.pictureBox1.Location = new System.Drawing.Point(9, 32);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(126, 69);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox1.TabIndex = 2;
+			this.pictureBox1.TabStop = false;
+			// 
+			// button2
+			// 
+			this.button2.BackgroundImage = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.indir;
+			this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.button2.Location = new System.Drawing.Point(516, 34);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(40, 32);
+			this.button2.TabIndex = 9;
+			this.button2.Text = ".";
+			this.button2.UseVisualStyleBackColor = true;
+			// 
+			// button1
+			// 
+			this.button1.BackgroundImage = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.png_transparent_announce_megaphone_icon_megaphone_icon_announcement_icon_symbol_announcement_communication_marketing_speaker_thumbnail;
+			this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.button1.Location = new System.Drawing.Point(470, 35);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(40, 30);
+			this.button1.TabIndex = 6;
+			this.button1.Text = ".";
+			this.button1.UseVisualStyleBackColor = true;
 			// 
 			// FrmVarliklar
 			// 
@@ -253,9 +254,9 @@
 			this.Name = "FrmVarliklar";
 			this.Text = "FrmVarliklar";
 			this.Load += new System.EventHandler(this.FrmVarliklar_Load);
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

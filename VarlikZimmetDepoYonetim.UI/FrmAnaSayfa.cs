@@ -17,5 +17,9 @@ namespace VarlikZimmetDepoYonetim.UI
 			InitializeComponent();
 		}
 
+		private void allProductsListToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }

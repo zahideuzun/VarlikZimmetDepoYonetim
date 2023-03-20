@@ -27,7 +27,21 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		private void lblTeamProducts_Click(object sender, EventArgs e)
 		{
+			lstProductList.Items.Clear();
+			TeamAssignmentDAL teamAssignmentDal = new TeamAssignmentDAL();
+			List<TeamAssignment> teamAssignments = teamAssignmentDal.Select(4);
+			int number = 1;
+			foreach (TeamAssignment teamAssignment in teamAssignments)
+			{
+				ListViewItem h1 = new ListViewItem(number++.ToString());
+				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.ProductBarcode.ToString());
+				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.ProductType.ToString());
+				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.Price.ToString());
+				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.Brand.BrandName);
+				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.Model.ModelName);
 
+				lstProductList.Items.Add(h1);
+			}
 		}
 
 		private void lblAllProducts_Click(object sender, EventArgs e)
@@ -44,7 +58,26 @@ namespace VarlikZimmetDepoYonetim.UI
 				h1.SubItems.Add(product.Brand.BrandName);
 				h1.SubItems.Add(product.Model.ModelName);
 
-				lstProductList.Items.Add(/*new ListViewItem[] {*/ h1);
+				lstProductList.Items.Add(h1);
+			}
+		}
+
+		private void lblMyProducts_Click(object sender, EventArgs e)
+		{
+			lstProductList.Items.Clear();
+			UserAssignmentDAL userAssignmentDal = new UserAssignmentDAL();
+			List<UserAssignment> userAssignments = userAssignmentDal.Select(2);
+			int number = 1;
+			foreach (UserAssignment userAssignment in userAssignments)
+			{
+				ListViewItem h1 = new ListViewItem(number++.ToString());
+				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.ProductBarcode.ToString());
+				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.ProductType.ToString());
+				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.Price.ToString());
+				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.Brand.BrandName);
+				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.Model.ModelName);
+
+				lstProductList.Items.Add(h1);
 			}
 		}
 	}

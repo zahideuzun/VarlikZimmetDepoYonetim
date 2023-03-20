@@ -16,7 +16,7 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new FrmGirisEkrani());
+			Application.Run(new FrmVarliklar());
 		}
 	}
 }

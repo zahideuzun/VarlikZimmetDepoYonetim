@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InventoryAssignmentDAL.cs" />
     <Compile Include="IRepo\IDeleteRepo.cs" />
     <Compile Include="IRepo\IInsertRepo.cs" />
     <Compile Include="IRepo\ISelectRepo.cs" />
+    <Compile Include="IRepo\ISelectRepoId.cs" />
     <Compile Include="IRepo\IUpdateRepo.cs" />
     <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TeamAssignmentDAL.cs" />
     <Compile Include="UserAssignmentDAL.cs" />
   </ItemGroup>
   <ItemGroup>
