@@ -14,7 +14,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		public UserRole UserLogin(string email, string password)
 		{
 			UserRole userLogin = null;
-			SqlDbService sqlDbService = new SqlDbService($"select k.KullaniciId ,k.KullaniciIsim ,k.KullaniciSoyisim, rl.RolIsmi  from Kullanici k\r\njoin KullaniciRol kr on kr.KullaniciId = k.KullaniciId\r\njoin Rol rl on rl.RolId = kr.RolId where k.KullaniciMail = '{email}' and k.KullaniciSifre = '{password}' and k.AktifMi='True'");
+			SqlDbService sqlDbService = new SqlDbService($"select k.KullaniciId ,k.KullaniciIsim ,k.KullaniciSoyisim, rl.RolIsmi  from Kullanici k\r\njoin KullaniciRol kr on kr.KullaniciId = k.KullaniciId\r\njoin Rol rl on rl.RolId = kr.RolId where k.KullaniciMail = '{email}' and k.KullaniciSifre = '{password}'");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 			if (reader.HasRows)

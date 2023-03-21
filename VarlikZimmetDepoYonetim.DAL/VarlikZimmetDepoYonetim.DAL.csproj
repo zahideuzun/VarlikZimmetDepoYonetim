@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementDAL.cs" />
+    <Compile Include="BrandDAL.cs" />
+    <Compile Include="CurrencyDAL.cs" />
     <Compile Include="CustomerProductDAL.cs" />
     <Compile Include="InventoryAssignmentDAL.cs" />
     <Compile Include="IRepo\IDeleteRepo.cs" />
@@ -49,7 +51,10 @@
     <Compile Include="IRepo\ISelectRepo.cs" />
     <Compile Include="IRepo\ISelectRepoId.cs" />
     <Compile Include="IRepo\IUpdateRepo.cs" />
+    <Compile Include="ModelDAL.cs" />
+    <Compile Include="PriceDAL.cs" />
     <Compile Include="ProductDAL.cs" />
+    <Compile Include="ProductTypeDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionDAL.cs" />
     <Compile Include="TeamAssignmentDAL.cs" />

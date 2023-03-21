@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class InventoryReason
+	public class InventoryReason : BaseDTO 
 	{
 		public int InventoryReasonId { get; set; }
 		public string InventoryReasonName { get; set; }

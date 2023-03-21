@@ -342,6 +342,7 @@
 			this.cmbBrand.Name = "cmbBrand";
 			this.cmbBrand.Size = new System.Drawing.Size(303, 27);
 			this.cmbBrand.TabIndex = 2;
+			this.cmbBrand.SelectedIndexChanged += new System.EventHandler(this.cmbBrand_SelectedIndexChanged);
 			// 
 			// cmbProductCurrency
 			// 
@@ -524,6 +525,7 @@
 			this.Controls.Add(this.label19);
 			this.Name = "FrmVarlikBilgileri";
 			this.Text = "FrmVarlikBilgileri";
+			this.Load += new System.EventHandler(this.FrmVarlikBilgileri_Load);
 			this.grbProductInfo.ResumeLayout(false);
 			this.grbProductInfo.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

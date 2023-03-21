@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class Question
+	public class Question : BaseDTO
 	{
 		public int QuestionId { get; set; }
 		public string QuestionName { get; set; }

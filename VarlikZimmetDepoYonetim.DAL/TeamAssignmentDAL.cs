@@ -16,7 +16,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		{
 			List<TeamAssignment> teamAssignments = null;
 
-			SqlDbService sqlDbService = new SqlDbService($"select  u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from EkipZimmet uz \r\n\t inner join Ekip e on uz.EkipId = e.EkipId\r\n\t inner join Zimmet z on uz.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunGrubu ug on u.UrunGrubuId= ug.UrunGrubuId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where uz.EkipId = {id} and uz.AktifMi = 'True'");
+			SqlDbService sqlDbService = new SqlDbService($"select  u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from EkipZimmet uz \r\n\t inner join Ekip e on uz.EkipId = e.EkipId\r\n\t inner join Zimmet z on uz.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunGrubu ug on u.UrunGrubuId= ug.UrunGrubuId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where uz.EkipId = {id}");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 

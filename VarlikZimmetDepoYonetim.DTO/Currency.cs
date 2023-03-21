@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class Currency
+	public class Currency : BaseDTO 
 	{
 		public int CurrencyId { get; set; }
 		public string CurrencyName { get; set; }

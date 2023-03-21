@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class Model : BaseDTO
+	public class ProductStatus : BaseDTO 
 	{
-		public int ModelId { get; set; }
-		public string ModelName { get; set; }
-		public Brand Brand { get; set; }
+		public int ProductStatusId { get; set; }
+		public string ProductStatusName { get; set; }
 	}
-
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class TeamAssignment
+	public class TeamAssignment : BaseDTO
 	{
 		public Team Team { get; set; }
 		public InventoryAssignment InventoryAssignment { get; set; }

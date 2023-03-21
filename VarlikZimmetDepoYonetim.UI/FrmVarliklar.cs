@@ -16,6 +16,7 @@ namespace VarlikZimmetDepoYonetim.UI
 	public partial class FrmVarliklar : Form
 	{
 		private UserRole userLogin = new UserRole();
+		private FrmVarlikBilgileri frmVarlikBilgileri;
 		public FrmVarliklar()
 		{
 			InitializeComponent();
@@ -86,6 +87,12 @@ namespace VarlikZimmetDepoYonetim.UI
 
 				lstProductList.Items.Add(h1);
 			}
+		}
+
+		private void lstProductList_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			frmVarlikBilgileri = new FrmVarlikBilgileri();
+			frmVarlikBilgileri.Show();
 		}
 	}
 }

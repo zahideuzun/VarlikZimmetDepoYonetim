@@ -152,6 +152,7 @@
             this.columnHeader5,
             this.columnHeader6});
 			this.lstProductList.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.lstProductList.FullRowSelect = true;
 			this.lstProductList.HideSelection = false;
 			this.lstProductList.Location = new System.Drawing.Point(171, 186);
 			this.lstProductList.Name = "lstProductList";
@@ -159,6 +160,7 @@
 			this.lstProductList.TabIndex = 10;
 			this.lstProductList.UseCompatibleStateImageBehavior = false;
 			this.lstProductList.View = System.Windows.Forms.View.Details;
+			this.lstProductList.SelectedIndexChanged += new System.EventHandler(this.lstProductList_SelectedIndexChanged);
 			// 
 			// columnHeader1
 			// 

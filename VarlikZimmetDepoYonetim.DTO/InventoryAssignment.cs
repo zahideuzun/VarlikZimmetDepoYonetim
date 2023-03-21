@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class InventoryAssignment
+	public class InventoryAssignment : BaseDTO
 	{
 		public int InventoryAssignmentId { get; set; }
 		public Product Product { get; set; }
 		public InventoryReason AssignmentReason { get; set; }
 		public InventoryType AssignmentType { get; set; }
 		public string Description { get; set; }
+
 	}
 
 }
