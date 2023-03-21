@@ -15,14 +15,21 @@ namespace VarlikZimmetDepoYonetim.UI
 {
 	public partial class FrmVarliklar : Form
 	{
+		private UserRole userLogin = new UserRole();
 		public FrmVarliklar()
 		{
 			InitializeComponent();
 		}
 
+		public FrmVarliklar(UserRole userLogin) : this()
+		{
+			lblAllProducts.Enabled = false;
+			this.userLogin = userLogin;
+		}
+
 		private void FrmVarliklar_Load(object sender, EventArgs e)
 		{
-			
+			if(userLogin.Role.RoleName == "PowerUser" || userLogin.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
 		}
 
 		private void lblTeamProducts_Click(object sender, EventArgs e)

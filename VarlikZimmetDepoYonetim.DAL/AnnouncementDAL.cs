@@ -25,10 +25,10 @@ namespace VarlikZimmetDepoYonetim.DAL
 				announcements = new List<Announcement>();
 				while (reader.Read())
 				{
-					Announcement a = new Announcement();
-					a.AnnouncementName = reader.GetString(0);
-					a.AnnouncementDescription = reader.GetString(1);
-					announcements.Add(a);
+					Announcement announcement = new Announcement();
+					announcement.AnnouncementName = reader.GetString(0);
+					announcement.AnnouncementDescription = reader.GetString(1);
+					announcements.Add(announcement);
 				}
 			}
 			sqlDbService.Close();

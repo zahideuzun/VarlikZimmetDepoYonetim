@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementDAL.cs" />
+    <Compile Include="CustomerProductDAL.cs" />
     <Compile Include="InventoryAssignmentDAL.cs" />
     <Compile Include="IRepo\IDeleteRepo.cs" />
     <Compile Include="IRepo\IInsertRepo.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="QuestionDAL.cs" />
     <Compile Include="TeamAssignmentDAL.cs" />
     <Compile Include="UserAssignmentDAL.cs" />
+    <Compile Include="UserLoginDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VarlikZimmetDepoYonetim.DTO\VarlikZimmetDepoYonetim.DTO.csproj">

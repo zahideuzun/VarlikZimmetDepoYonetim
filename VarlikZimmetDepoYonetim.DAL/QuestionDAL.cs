@@ -25,10 +25,10 @@ namespace VarlikZimmetDepoYonetim.DAL
 				questions = new List<Question>();
 				while (reader.Read())
 				{
-					Question q = new Question();
-					q.QuestionName = reader.GetString(0);
-					q.QuestionAnswer = reader.GetString(1);
-					questions.Add(q);
+					Question question = new Question();
+					question.QuestionName = reader.GetString(0);
+					question.QuestionAnswer = reader.GetString(1);
+					questions.Add(question);
 				}
 			}
 			sqlDbService.Close();

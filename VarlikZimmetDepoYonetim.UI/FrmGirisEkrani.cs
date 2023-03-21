@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VarlikZimmetDepoYonetim.DAL;
+using VarlikZimmetDepoYonetim.DTO;
 using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.UI
@@ -30,39 +32,50 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		void Login()
 		{
-			string email = tbUserMailAddress.Text;
-			string password = tbUserPassword.Text;
-			
-			SqlDbService sqlDbService =
-				new SqlDbService(
-					"select KullaniciSifre from Kullanici where KullaniciMail = @Email");
-
-			sqlDbService.Open();
-			List<SqlParameter> parameterList = new List<SqlParameter>();
-			parameterList.Add(new SqlParameter("@Email", email));
-			sqlDbService.AddParameter(parameterList.ToArray());
-			SqlDataReader reader = sqlDbService.ExReader();
-
-			if (reader.Read())
+			UserLoginDAL userLogin = new UserLoginDAL();
+			UserRole userRole = userLogin.UserLogin(tbUserMailAddress.Text, tbUserPassword.Text);
+			if (userRole != null)
 			{
-				string dbPassword = reader["KullaniciSifre"].ToString();
-
-				if (dbPassword == password)
-				{
-					MessageBox.Show("Login successful.");
-					FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa();
-					frmAnaSayfa.Show();
-					// TODO: Kullanıcı rolüne göre uygun sayfaya yönlendirme yapılabilir.
-				}
-				else
-				{
-					MessageBox.Show("Invalid password.");
-				}
+				MessageBox.Show("Login successful.");
+				FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa(userRole);
+				frmAnaSayfa.Show();
 			}
 			else
 			{
-				MessageBox.Show("Invalid email.");
+				MessageBox.Show("Invalid password.");
 			}
+			//string email = tbUserMailAddress.Text;
+			//string password = tbUserPassword.Text;
+
+			//SqlDbService sqlDbService =
+			//	new SqlDbService(
+			//		"select KullaniciSifre from Kullanici where KullaniciMail = @Email");
+
+			//sqlDbService.Open();
+			//List<SqlParameter> parameterList = new List<SqlParameter>();
+			//parameterList.Add(new SqlParameter("@Email", email));
+			//sqlDbService.AddParameter(parameterList.ToArray());
+			//SqlDataReader reader = sqlDbService.ExReader();
+
+			//if (reader.Read())
+			//{
+			//	string dbPassword = reader["KullaniciSifre"].ToString();
+
+			//	if (dbPassword == password)
+			//	{
+			//		MessageBox.Show("Login successful.");
+			//		FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa();
+			//		frmAnaSayfa.Show();
+			//	}
+			//	else
+			//	{
+			//		MessageBox.Show("Invalid password.");
+			//	}
+			//}
+			//else
+			//{
+			//	MessageBox.Show("Invalid email.");
+			//}
 		}
 
 		private void cbShowPassword_CheckedChanged(object sender, EventArgs e)

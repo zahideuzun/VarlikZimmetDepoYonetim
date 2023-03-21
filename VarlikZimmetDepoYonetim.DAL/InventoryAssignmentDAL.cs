@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,34 @@ namespace VarlikZimmetDepoYonetim.DAL
 
 			return new MyResult();
 		}
+
+		public void Delete(int id)
+		{
+			// Bağlantı cümlesi oluşturma
+			string connectionString = "connection stringiniz";
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				// Sorgu yazma
+				string query = "UPDATE TabloAdi SET IsActive = 0 WHERE Id = @id";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					// Parametre ekleme
+					command.Parameters.AddWithValue("@id", id);
+
+					// Bağlantı açma ve sorguyu çalıştırma
+					connection.Open();
+					int result = command.ExecuteNonQuery();
+					if (result > 0)
+					{
+						// Başarıyla güncellendi
+					}
+					else
+					{
+						// Güncelleme işlemi başarısız oldu
+					}
+				}
+			}
+		}
+
 	}
 }
