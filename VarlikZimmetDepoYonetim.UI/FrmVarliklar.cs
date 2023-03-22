@@ -17,6 +17,12 @@ namespace VarlikZimmetDepoYonetim.UI
 	{
 		private UserRole userLogin = new UserRole();
 		private FrmVarlikBilgileri frmVarlikBilgileri;
+		private User user;
+		private List<TeamAssignment> teamAssignments;
+		List<UserAssignment> userAssignments;
+		private UserAssignment selectedUserAssignment;
+		private List<Product> products;
+		private Product selectedProduct;
 		public FrmVarliklar()
 		{
 			InitializeComponent();
@@ -30,7 +36,7 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		private void FrmVarliklar_Load(object sender, EventArgs e)
 		{
-			if(userLogin.Role.RoleName == "PowerUser" || userLogin.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
+			if (userLogin.Role.RoleName == "PowerUser" || userLogin.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
 		}
 
 		private void lblTeamProducts_Click(object sender, EventArgs e)
@@ -55,7 +61,7 @@ namespace VarlikZimmetDepoYonetim.UI
 		private void lblAllProducts_Click(object sender, EventArgs e)
 		{
 			ProductDAL productDAL = new ProductDAL();
-			List<Product> products = productDAL.Select();
+			products = productDAL.Select();
 
 			foreach (Product product in products)
 			{
@@ -91,8 +97,48 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		private void lstProductList_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			frmVarlikBilgileri = new FrmVarlikBilgileri();
-			frmVarlikBilgileri.Show();
 		}
+
+		private bool PowerUserRole()
+		{
+			return userLogin.Role.RoleName == "PowerUser";
+		}
+
+		private void btnProductUpdate_Click(object sender, EventArgs e)
+		{
+			//SelectedItems[0] yani seçtiğimiz itemsin indeksini bize döndürür. Bir adet değer seçtiğimizden dolayı 0 veririz.
+			//SubItems ise bize hangi sütunu seçtiğimizi belirtir. 1 ile adı soyadı bilgisini geri döndürür.
+			string selectedId = lstProductList.SelectedItems[0].SubItems[0].Text;
+
+			if (!PowerUserRole())
+			{
+				foreach (UserAssignment userAssignment in userAssignments)
+				{
+					if (userAssignment.UserAssignmentId == int.Parse(selectedId))
+					{
+						selectedUserAssignment = userAssignment;
+					}
+				}
+				FrmVarlikBilgileri frmVarlikBilgileri = new FrmVarlikBilgileri(selectedUserAssignment);
+				frmVarlikBilgileri.Show();
+				this.Tag = selectedUserAssignment.InventoryAssignment.Product;
+			}
+			else
+			{
+
+				foreach (Product product in products)
+				{
+					if (product.ProductId == int.Parse(selectedId))
+					{
+						selectedProduct = product;
+					}
+
+				}
+				FrmVarlikBilgileri frmVarlikBilgileri = new FrmVarlikBilgileri(selectedProduct);
+				frmVarlikBilgileri.Show();
+				this.Tag = selectedProduct;
+			}
+		}
+		
 	}
 }

@@ -21,10 +21,11 @@ namespace VarlikZimmetDepoYonetim.Provider
 			cmd.CommandText = connectionQuery;
 			cmd.Connection = conn;
 		}
-		public void AddParameter(SqlParameter[] sqlParameters)
+		public void AddParameters(SqlParameter[] sqlParameters)
 		{
 			cmd.Parameters.AddRange(sqlParameters);
 		}
+
 		public void Open()
 		{
 			if (conn.State == ConnectionState.Closed) conn.Open();
@@ -43,30 +44,6 @@ namespace VarlikZimmetDepoYonetim.Provider
 			return cmd.ExecuteNonQuery();
 		}
 
-		public int ExcutNon()
-		{
-			int result = 0;
-
-			try
-			{
-
-				Open();
-				result = cmd.ExecuteNonQuery();
-
-			}
-			catch (Exception ex)
-			{
-
-				result = 0;
-			}
-			finally
-			{
-				Close();
-			}
-
-			return result;
-
-		}
 
 		public object ExecuteScalar()
 		{
@@ -84,7 +61,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			{
 				if (parameter != null)
 				{
-					AddParameter(parameter);
+					AddParameters(parameter);
 				}
 
 				if (queryType == "insert" || queryType == "update" || queryType == "delete")
@@ -123,7 +100,7 @@ namespace VarlikZimmetDepoYonetim.Provider
 			{
 				if (parameter != null)
 				{
-					AddParameter(parameter);
+					AddParameters(parameter);
 				}
 				foreach (string command in commands)
 				{

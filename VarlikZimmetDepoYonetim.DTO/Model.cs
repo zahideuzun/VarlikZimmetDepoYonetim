@@ -11,6 +11,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public int ModelId { get; set; }
 		public string ModelName { get; set; }
 		public Brand Brand { get; set; }
+		public override string ToString()
+		{
+			return ModelName;
+		}
 	}
 
 }

@@ -16,7 +16,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		{
 			List<Brand> brands = null;
 
-			SqlDbService sqlDbService = new SqlDbService("select m.MarkaId ,m.MarkaAdi from Marka m");
+			SqlDbService sqlDbService = new SqlDbService("select m.MarkaId ,m.MarkaAdi from Marka m where m.AktifMi = 'True'");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VarlikZimmetDepoYonetim.DTO
 {
-	public class Product
+	public class Product : BaseDTO 
 	{
 		public int ProductId { get; set; }
 		public Guid ProductBarcode { get; set; }
@@ -17,12 +17,13 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public Model Model { get; set; }
 		public bool IsWarrantyValid { get; set; }
 		public DateTime EntryDate { get; set; }
-		public DateTime RetirementDate { get; set; }
+		public DateTime? RetirementDate { get; set; }
 		public double ProductCost { get; set; }
 		public string Description { get; set; }
 		public string FilePath { get; set; }
 		public ProductStatus ProductStatus { get; set; }
 		public Currency CostCurrency { get; set; }
+
 
 	}
 

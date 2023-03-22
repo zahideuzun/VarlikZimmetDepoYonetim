@@ -15,11 +15,38 @@ namespace VarlikZimmetDepoYonetim.UI
 	
 	public partial class FrmVarlikBilgileri : Form
 	{
+		#region Instances
+
 		FrmZimmetAtama zimmetAtama;
 		private FrmTuket tuket;
+		private UserAssignment selectedUserAssignment;
+		private Product selectedProduct;
+		List<Price> prices;
+		List<Currency> currencies;
+		List<Product> products;
+		List<Brand> brands;
+		List<ProductType> productTypes;
+		private ProductDAL productDal;
+		private CurrencyDAL currencyDAL;
+		private PriceDAL priceDAL;
+		private ProductTypeDAL productTypeDal;
+		private BrandDAL brandDal;
+
+		#endregion
+
 		public FrmVarlikBilgileri()
 		{
 			InitializeComponent();
+		}
+
+		public FrmVarlikBilgileri(UserAssignment selectedUserAssignment) : this()
+		{
+			this.selectedUserAssignment = selectedUserAssignment;
+		}
+
+		public FrmVarlikBilgileri(Product selectedProduct) : this() 
+		{
+			this.selectedProduct = selectedProduct;
 		}
 
 		private void cmbActions_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,30 +73,86 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		void FormLoad()
 		{
+			#region Instances
+			productDal = new ProductDAL();
+			currencyDAL = new CurrencyDAL();
+			priceDAL = new PriceDAL();
+			productTypeDal = new ProductTypeDAL();
+			brandDal = new BrandDAL();
+
+
+			#endregion
+
+
+
+			#region EnabledControl
+			cmbUnit.Enabled = false;
+			numAmount.Enabled = false;
 			cmbModel.Enabled = false;
-			ProductDAL productDal = new ProductDAL();
-			CurrencyDAL currencyDAL = new CurrencyDAL();
-			PriceDAL priceDAL = new PriceDAL();
-			ProductTypeDAL productTypeDal = new ProductTypeDAL();
-			BrandDAL brandDal = new BrandDAL();
+			dtpProductRetirementDate.Enabled = false;
+			tbBarcode.Enabled = false;
+			#endregion
 
 
-			List<Price> prices = priceDAL.Select(1);
-			List<Currency> currencies = currencyDAL.Select();
-			List<ProductType> productTypes = productTypeDal.Select();
-			List<Product> products = productDal.Select(1);
-			List<Brand> brands = brandDal.Select();
+			#region FormLoadControls
+
+			if (selectedProduct == null)
+			{
+				prices = priceDAL.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
+				products = productDal.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
+				lblProductName.Text = selectedUserAssignment.InventoryAssignment.Product.ProductId.ToString();
+			}
+			else
+			{
+				prices = priceDAL.Select(selectedProduct.ProductId);
+				products = productDal.Select(selectedProduct.ProductId);
+				lblProductName.Text = selectedProduct.ProductId.ToString();
+			}
+
+
+			ListViewItem h1 = new ListViewItem(selectedProduct.EntryDate.ToString());
+			h1.SubItems.Add(selectedProduct.CreatedBy = "Zahide Uzun");
+			//h1.SubItems.Add(selectedProduct.ProductStatus.ProductStatusName);
+			h1.SubItems.Add(selectedProduct.Description);
+			lstProductStatus.Items.Add(h1);
+
+			currencies = currencyDAL.Select();
+			productTypes = productTypeDal.Select();
+			brands = brandDal.Select();
+
+			cmbBrand.Items.AddRange(brands.ToArray());
+			tbBarcode.Text = products[0].ProductBarcode.ToString();
+
+			cmbProductType.Items.AddRange(productTypes.ToArray());
+			cmbProductType.SelectedItem = productTypes[0].ProductTypeName;
+			cmbProductType.Text = products[0].ProductType.ProductTypeName;
+
+			cmbGuarente.SelectedItem = (products[0].IsWarrantyValid ? 1 : 0);
+			cmbGuarente.Text = products[0].IsWarrantyValid ? "Evet" : "Hayır";
+
+			tbProductCost.Text = products[0].ProductCost.ToString();
+
+			dtpProductDateOfEntry.Value = products[0].EntryDate;
+
+			cmbProductCurrency.Items.AddRange(currencies.ToArray());
+			cmbProductCurrency.SelectedItem = (products[0].ProductCost);
+			cmbProductCurrency.Text = products[0].CostCurrency.CurrencyName;
+
+			tbDescription.Text = products[0].Description;
 			
+			tbProductCurrentPrice.Text = prices[0] .CurrentPrice.ToString();
 
+			cmbProductPriceCurrency.Items.AddRange(currencies.ToArray());
+			cmbProductPriceCurrency.SelectedItem = prices[0];
+			cmbProductPriceCurrency.Text = prices[0].Currency.CurrencyName;
 
+			cmbBrand.SelectedItem = products[0].Brand;
+			cmbBrand.Text = products[0].Brand.ToString();
 
-			//cmbBrand.Items.AddRange(brands.ToArray());
+			cmbModel.SelectedItem = products[0].Model;
+			cmbModel.Text = products[0].Model.ToString();
 
-			cmbBrand.DataSource = brands;
-			cmbBrand.DisplayMember = "BrandName";
-			cmbBrand.ValueMember = "BrandId";
-
-
+			#endregion
 		}
 
 		private void cmbBrand_SelectedIndexChanged(object sender, EventArgs e)
@@ -77,10 +160,16 @@ namespace VarlikZimmetDepoYonetim.UI
 			cmbModel.Enabled = true;
 			ModelDAL modelDAL = new ModelDAL();
 			List<Model> models = new List<Model>();
-			int selectedBrandId = (int)cmbBrand.SelectedValue;
-			models = modelDAL.Select(selectedBrandId);
+			Brand selectedBrand = cmbBrand.SelectedItem as Brand;
+			models = modelDAL.Select(selectedBrand.BrandId);
 			cmbModel.Items.Clear();
 			cmbModel.Items.AddRange(models.ToArray());
+
+		}
+
+		private void cbProductWithoutBarcode_CheckedChanged(object sender, EventArgs e)
+		{
+			cmbUnit.Enabled = lblAmount.Enabled = (cbProductWithoutBarcode.Checked ? true : false);
 
 		}
 	}

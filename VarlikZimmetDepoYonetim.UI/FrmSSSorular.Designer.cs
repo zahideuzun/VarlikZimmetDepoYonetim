@@ -34,7 +34,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(517, 350);
+			this.ClientSize = new System.Drawing.Size(610, 350);
 			this.Name = "FrmSSSorular";
 			this.Text = "FrmSSSorular";
 			this.ResumeLayout(false);

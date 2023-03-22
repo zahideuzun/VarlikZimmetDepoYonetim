@@ -18,7 +18,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		{
 			List<Product> products = null;
 
-			SqlDbService sqlDbService = new SqlDbService("select u.UrunId as [Kayıt Numarası], u.BarkodNo, ut.UrunTipiAdi as [Ürün Tipi], f.GuncelFiyat as [Ürünün Güncel Fiyatı], mr.MarkaAdi as Marka, \r\nmo.ModelAdi as Model from Urun u \r\njoin UrunTipi ut on u.UrunTipiId = ut.UrunTipiId\r\njoin Marka mr on mr.MarkaId = u.MarkaId\r\njoin Model mo on mo.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId");
+			SqlDbService sqlDbService = new SqlDbService("select u.UrunId as [Kayıt Numarası], u.BarkodNo, ut.UrunTipiAdi as [Ürün Tipi], f.GuncelFiyat as [Ürünün Güncel Fiyatı], mr.MarkaAdi as Marka, \r\nmo.ModelAdi as Model from Urun u \r\njoin UrunTipi ut on u.UrunTipiId = ut.UrunTipiId\r\njoin Marka mr on mr.MarkaId = u.MarkaId\r\njoin Model mo on mo.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId where u.AktifMi = 'True'");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 
@@ -48,7 +48,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		public List<Product> Select(int id)
 		{
 			List<Product> updateProducts = null;
-			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ug.UrunGrubuId [ürün grubu id] , ug.UrunGrubuAdi [Ürün Grubu], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,u.UrunEmeklilikTarihi [Ürün Emeklilik Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.FiyatId [fiyat id],f.GuncelFiyat [Güncel Fiyat] from Urun u\r\njoin UrunGrubu ug on ug.UrunGrubuId = u.UrunGrubuId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.UrunId = {id}");
+			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ut.UrunTipiId [ürün tipi id] , ut.UrunTipiAdi [Ürün Tipi], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.GuncelFiyat [Güncel Fiyat] from Urun u\r\njoin UrunTipi ut on ut.UrunTipiId = u.UrunTipiId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.AktifMi = 'True' and u.UrunId = {id}");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 
@@ -57,7 +57,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 				updateProducts = new List<Product>();
 				while (reader.Read())
 				{
-					Product product = new Product
+					Product product = new Product()
 					{
 						ProductBarcode = reader.GetGuid(reader.GetOrdinal("BarkodNo")),
 						ProductType = new ProductType
@@ -75,17 +75,17 @@ namespace VarlikZimmetDepoYonetim.DAL
 							ModelId = reader.GetInt32(5),
 							ModelName = reader.GetString(6)
 						},
-						IsWarrantyValid = reader.GetBoolean(7),
+						IsWarrantyValid = (reader.GetString(7) == "Var"),
 						Description = reader.GetString(8),
 						EntryDate = reader.GetDateTime(9),
-						RetirementDate = reader.GetDateTime(10),
-						ProductCost = reader.GetDouble(11),
+						ProductCost = Convert.ToDouble(reader.GetDecimal(10)),
 						CostCurrency = new Currency
 						{
-							CurrencyId = reader.GetInt32(12),
-							CurrencyName = reader.GetString(13)
+							CurrencyId = reader.GetInt32(11),
+							CurrencyName = reader.GetString(12)
 						},
-						Price = Convert.ToDouble(reader.GetDecimal(14))
+
+						Price = Convert.ToDouble(reader.GetDecimal(13))
 					};
 					updateProducts.Add(product);
 				}

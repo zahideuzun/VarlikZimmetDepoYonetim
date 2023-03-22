@@ -29,16 +29,15 @@
 		private void InitializeComponent()
 		{
 			this.grbProductInfo = new System.Windows.Forms.GroupBox();
-			this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+			this.numAmount = new System.Windows.Forms.NumericUpDown();
 			this.cmbUnit = new System.Windows.Forms.ComboBox();
-			this.rdbProductWithoutBarcode = new System.Windows.Forms.RadioButton();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label13 = new System.Windows.Forms.Label();
 			this.label12 = new System.Windows.Forms.Label();
 			this.label11 = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.numAmount = new System.Windows.Forms.Label();
+			this.lblAmount = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -50,7 +49,7 @@
 			this.dtpProductDateOfEntry = new System.Windows.Forms.DateTimePicker();
 			this.cmbModel = new System.Windows.Forms.ComboBox();
 			this.cmbGuarente = new System.Windows.Forms.ComboBox();
-			this.comboBox6 = new System.Windows.Forms.ComboBox();
+			this.cmbProductPriceCurrency = new System.Windows.Forms.ComboBox();
 			this.cmbBrand = new System.Windows.Forms.ComboBox();
 			this.cmbProductCurrency = new System.Windows.Forms.ComboBox();
 			this.cmbProductType = new System.Windows.Forms.ComboBox();
@@ -67,25 +66,30 @@
 			this.btnProductSearch = new System.Windows.Forms.Button();
 			this.cmbActions = new System.Windows.Forms.ComboBox();
 			this.label19 = new System.Windows.Forms.Label();
-			this.listView1 = new System.Windows.Forms.ListView();
+			this.lstProductStatus = new System.Windows.Forms.ListView();
 			this.lblProductName = new System.Windows.Forms.Label();
+			this.cbProductWithoutBarcode = new System.Windows.Forms.CheckBox();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.grbProductInfo.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.numAmount)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grbProductInfo
 			// 
 			this.grbProductInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.grbProductInfo.Controls.Add(this.numericUpDown1);
+			this.grbProductInfo.Controls.Add(this.cbProductWithoutBarcode);
+			this.grbProductInfo.Controls.Add(this.numAmount);
 			this.grbProductInfo.Controls.Add(this.cmbUnit);
-			this.grbProductInfo.Controls.Add(this.rdbProductWithoutBarcode);
 			this.grbProductInfo.Controls.Add(this.label8);
 			this.grbProductInfo.Controls.Add(this.label13);
 			this.grbProductInfo.Controls.Add(this.label12);
 			this.grbProductInfo.Controls.Add(this.label11);
 			this.grbProductInfo.Controls.Add(this.label9);
 			this.grbProductInfo.Controls.Add(this.label4);
-			this.grbProductInfo.Controls.Add(this.numAmount);
+			this.grbProductInfo.Controls.Add(this.lblAmount);
 			this.grbProductInfo.Controls.Add(this.label7);
 			this.grbProductInfo.Controls.Add(this.label2);
 			this.grbProductInfo.Controls.Add(this.label6);
@@ -97,7 +101,7 @@
 			this.grbProductInfo.Controls.Add(this.dtpProductDateOfEntry);
 			this.grbProductInfo.Controls.Add(this.cmbModel);
 			this.grbProductInfo.Controls.Add(this.cmbGuarente);
-			this.grbProductInfo.Controls.Add(this.comboBox6);
+			this.grbProductInfo.Controls.Add(this.cmbProductPriceCurrency);
 			this.grbProductInfo.Controls.Add(this.cmbBrand);
 			this.grbProductInfo.Controls.Add(this.cmbProductCurrency);
 			this.grbProductInfo.Controls.Add(this.cmbProductType);
@@ -114,12 +118,12 @@
 			this.grbProductInfo.TabStop = false;
 			this.grbProductInfo.Text = "Ürün Bilgileri";
 			// 
-			// numericUpDown1
+			// numAmount
 			// 
-			this.numericUpDown1.Location = new System.Drawing.Point(418, 398);
-			this.numericUpDown1.Name = "numericUpDown1";
-			this.numericUpDown1.Size = new System.Drawing.Size(64, 25);
-			this.numericUpDown1.TabIndex = 7;
+			this.numAmount.Location = new System.Drawing.Point(418, 398);
+			this.numAmount.Name = "numAmount";
+			this.numAmount.Size = new System.Drawing.Size(64, 25);
+			this.numAmount.TabIndex = 7;
 			// 
 			// cmbUnit
 			// 
@@ -128,18 +132,6 @@
 			this.cmbUnit.Name = "cmbUnit";
 			this.cmbUnit.Size = new System.Drawing.Size(64, 27);
 			this.cmbUnit.TabIndex = 6;
-			// 
-			// rdbProductWithoutBarcode
-			// 
-			this.rdbProductWithoutBarcode.AutoSize = true;
-			this.rdbProductWithoutBarcode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.rdbProductWithoutBarcode.Location = new System.Drawing.Point(28, 36);
-			this.rdbProductWithoutBarcode.Name = "rdbProductWithoutBarcode";
-			this.rdbProductWithoutBarcode.Size = new System.Drawing.Size(133, 23);
-			this.rdbProductWithoutBarcode.TabIndex = 5;
-			this.rdbProductWithoutBarcode.TabStop = true;
-			this.rdbProductWithoutBarcode.Text = "Barkodsuz Ürün";
-			this.rdbProductWithoutBarcode.UseVisualStyleBackColor = true;
 			// 
 			// label8
 			// 
@@ -207,16 +199,16 @@
 			this.label4.TabIndex = 4;
 			this.label4.Text = "Ürünün Emeklilik Tarihi";
 			// 
-			// numAmount
+			// lblAmount
 			// 
-			this.numAmount.AutoSize = true;
-			this.numAmount.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-			this.numAmount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.numAmount.Location = new System.Drawing.Point(371, 403);
-			this.numAmount.Name = "numAmount";
-			this.numAmount.Size = new System.Drawing.Size(44, 16);
-			this.numAmount.TabIndex = 4;
-			this.numAmount.Text = "Miktar";
+			this.lblAmount.AutoSize = true;
+			this.lblAmount.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.lblAmount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.lblAmount.Location = new System.Drawing.Point(371, 403);
+			this.lblAmount.Name = "lblAmount";
+			this.lblAmount.Size = new System.Drawing.Size(44, 16);
+			this.lblAmount.TabIndex = 4;
+			this.lblAmount.Text = "Miktar";
 			// 
 			// label7
 			// 
@@ -322,18 +314,21 @@
 			// cmbGuarente
 			// 
 			this.cmbGuarente.FormattingEnabled = true;
+			this.cmbGuarente.Items.AddRange(new object[] {
+            "Hayır",
+            "Evet"});
 			this.cmbGuarente.Location = new System.Drawing.Point(26, 296);
 			this.cmbGuarente.Name = "cmbGuarente";
 			this.cmbGuarente.Size = new System.Drawing.Size(301, 27);
 			this.cmbGuarente.TabIndex = 2;
 			// 
-			// comboBox6
+			// cmbProductPriceCurrency
 			// 
-			this.comboBox6.FormattingEnabled = true;
-			this.comboBox6.Location = new System.Drawing.Point(347, 311);
-			this.comboBox6.Name = "comboBox6";
-			this.comboBox6.Size = new System.Drawing.Size(303, 27);
-			this.comboBox6.TabIndex = 2;
+			this.cmbProductPriceCurrency.FormattingEnabled = true;
+			this.cmbProductPriceCurrency.Location = new System.Drawing.Point(347, 311);
+			this.cmbProductPriceCurrency.Name = "cmbProductPriceCurrency";
+			this.cmbProductPriceCurrency.Size = new System.Drawing.Size(303, 27);
+			this.cmbProductPriceCurrency.TabIndex = 2;
 			// 
 			// cmbBrand
 			// 
@@ -488,14 +483,21 @@
 			this.label19.TabIndex = 4;
 			this.label19.Text = "Aksiyonlar";
 			// 
-			// listView1
+			// lstProductStatus
 			// 
-			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(30, 59);
-			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(570, 70);
-			this.listView1.TabIndex = 5;
-			this.listView1.UseCompatibleStateImageBehavior = false;
+			this.lstProductStatus.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+			this.lstProductStatus.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.lstProductStatus.HideSelection = false;
+			this.lstProductStatus.Location = new System.Drawing.Point(30, 59);
+			this.lstProductStatus.Name = "lstProductStatus";
+			this.lstProductStatus.Size = new System.Drawing.Size(570, 69);
+			this.lstProductStatus.TabIndex = 5;
+			this.lstProductStatus.UseCompatibleStateImageBehavior = false;
+			this.lstProductStatus.View = System.Windows.Forms.View.Details;
 			// 
 			// lblProductName
 			// 
@@ -506,13 +508,45 @@
 			this.lblProductName.TabIndex = 6;
 			this.lblProductName.Text = "Ürün Adı";
 			// 
+			// cbProductWithoutBarcode
+			// 
+			this.cbProductWithoutBarcode.AutoSize = true;
+			this.cbProductWithoutBarcode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.cbProductWithoutBarcode.Location = new System.Drawing.Point(28, 36);
+			this.cbProductWithoutBarcode.Name = "cbProductWithoutBarcode";
+			this.cbProductWithoutBarcode.Size = new System.Drawing.Size(134, 23);
+			this.cbProductWithoutBarcode.TabIndex = 8;
+			this.cbProductWithoutBarcode.Text = "Barkodsuz Ürün";
+			this.cbProductWithoutBarcode.UseVisualStyleBackColor = true;
+			this.cbProductWithoutBarcode.CheckedChanged += new System.EventHandler(this.cbProductWithoutBarcode_CheckedChanged);
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Kayıt Tarihi";
+			this.columnHeader1.Width = 145;
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Kayıt Açan";
+			this.columnHeader2.Width = 154;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Durum";
+			this.columnHeader3.Width = 109;
+			// 
+			// columnHeader4
+			// 
+			this.columnHeader4.Text = "Açıklama";
+			this.columnHeader4.Width = 154;
+			// 
 			// FrmVarlikBilgileri
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(725, 661);
 			this.Controls.Add(this.lblProductName);
-			this.Controls.Add(this.listView1);
+			this.Controls.Add(this.lstProductStatus);
 			this.Controls.Add(this.cmbActions);
 			this.Controls.Add(this.btnProductSearch);
 			this.Controls.Add(this.tbProductSearch);
@@ -528,7 +562,7 @@
 			this.Load += new System.EventHandler(this.FrmVarlikBilgileri_Load);
 			this.grbProductInfo.ResumeLayout(false);
 			this.grbProductInfo.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -549,7 +583,7 @@
 		private System.Windows.Forms.DateTimePicker dtpProductDateOfEntry;
 		private System.Windows.Forms.ComboBox cmbModel;
 		private System.Windows.Forms.ComboBox cmbGuarente;
-		private System.Windows.Forms.ComboBox comboBox6;
+		private System.Windows.Forms.ComboBox cmbProductPriceCurrency;
 		private System.Windows.Forms.ComboBox cmbBrand;
 		private System.Windows.Forms.ComboBox cmbProductCurrency;
 		private System.Windows.Forms.ComboBox cmbProductType;
@@ -557,14 +591,13 @@
 		private System.Windows.Forms.TextBox tbDescription;
 		private System.Windows.Forms.TextBox tbProductCost;
 		private System.Windows.Forms.TextBox tbBarcode;
-		private System.Windows.Forms.NumericUpDown numericUpDown1;
+		private System.Windows.Forms.NumericUpDown numAmount;
 		private System.Windows.Forms.ComboBox cmbUnit;
-		private System.Windows.Forms.RadioButton rdbProductWithoutBarcode;
 		private System.Windows.Forms.Label label13;
 		private System.Windows.Forms.Label label12;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.Label numAmount;
+		private System.Windows.Forms.Label lblAmount;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.Label label15;
@@ -575,7 +608,12 @@
 		private System.Windows.Forms.Button btnProductSearch;
 		private System.Windows.Forms.ComboBox cmbActions;
 		private System.Windows.Forms.Label label19;
-		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.ListView lstProductStatus;
 		private System.Windows.Forms.Label lblProductName;
+		private System.Windows.Forms.CheckBox cbProductWithoutBarcode;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.ColumnHeader columnHeader4;
 	}
 }

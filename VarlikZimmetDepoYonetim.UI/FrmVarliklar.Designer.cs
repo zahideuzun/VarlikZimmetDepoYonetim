@@ -48,6 +48,7 @@
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
+			this.btnProductUpdate = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
@@ -156,7 +157,7 @@
 			this.lstProductList.HideSelection = false;
 			this.lstProductList.Location = new System.Drawing.Point(171, 186);
 			this.lstProductList.Name = "lstProductList";
-			this.lstProductList.Size = new System.Drawing.Size(603, 328);
+			this.lstProductList.Size = new System.Drawing.Size(603, 285);
 			this.lstProductList.TabIndex = 10;
 			this.lstProductList.UseCompatibleStateImageBehavior = false;
 			this.lstProductList.View = System.Windows.Forms.View.Details;
@@ -237,11 +238,23 @@
 			this.button1.Text = ".";
 			this.button1.UseVisualStyleBackColor = true;
 			// 
+			// btnProductUpdate
+			// 
+			this.btnProductUpdate.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+			this.btnProductUpdate.Location = new System.Drawing.Point(664, 488);
+			this.btnProductUpdate.Name = "btnProductUpdate";
+			this.btnProductUpdate.Size = new System.Drawing.Size(100, 47);
+			this.btnProductUpdate.TabIndex = 12;
+			this.btnProductUpdate.Text = "Varlık Güncelle";
+			this.btnProductUpdate.UseVisualStyleBackColor = true;
+			this.btnProductUpdate.Click += new System.EventHandler(this.btnProductUpdate_Click);
+			// 
 			// FrmVarliklar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(818, 547);
+			this.Controls.Add(this.btnProductUpdate);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.lstProductList);
 			this.Controls.Add(this.button2);
@@ -286,5 +299,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.ColumnHeader columnHeader6;
 		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.Button btnProductUpdate;
 	}
 }
