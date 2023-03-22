@@ -12,13 +12,17 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class QuestionDAL : ISelectRepo<Question>
 	{
+		/// <summary>
+		/// Sık sorulan sorular ekranındaki soruların databaseden listeyen select metodu. Databasede örnek sorular kullanılmıştır.
+		/// </summary>
+		/// <returns></returns>
 		public List<Question> Select()
 		{
 			List<Question> questions = null;
 
 			SqlDbService sqlDbService = new SqlDbService("select s.SoruBasligi as [Soru Başlığı], s.SoruCevabi as [Cevap] from Soru s");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

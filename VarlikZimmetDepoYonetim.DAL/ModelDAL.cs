@@ -12,6 +12,11 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class ModelDAL : ISelectRepoId<Model>
 	{
+		/// <summary>
+		/// Ürün markalarının modellerini idlerine göre select sorgusuyla getiren list metodu.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<Model> Select(int id)
 		{
 
@@ -19,7 +24,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 
 			SqlDbService sqlDbService = new SqlDbService($"select m.ModelId ,m.ModelAdi, m.MarkaId, mr.MarkaAdi from Model m \r\njoin Marka mr on mr.MarkaId = m.MarkaId where m.AktifMi = 'True' and m.MarkaId = {id}");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

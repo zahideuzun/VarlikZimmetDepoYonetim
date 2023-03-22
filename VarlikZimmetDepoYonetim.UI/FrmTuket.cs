@@ -17,7 +17,6 @@ namespace VarlikZimmetDepoYonetim.UI
 	{
 		private int productId;
 		CustomerProductDAL customerProduct;
-		private Product product;
 
 
 		public FrmTuket()
@@ -25,11 +24,20 @@ namespace VarlikZimmetDepoYonetim.UI
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Bir önceki formdan(VarlikBilgileri) secili ürünün idsini alan constructor. 
+		/// </summary>
+		/// <param name="product"></param>
 		public FrmTuket(int product) : this()
 		{
 			this.productId = product;
 		}
 
+		/// <summary>
+		/// Kullanicinin zimmetli ürünlerden müsterilere ürün tükettirmesini CustomerProductDAL classiyla kontrol eden event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnConsume_Click(object sender, EventArgs e)
 		{
 			customerProduct = new CustomerProductDAL();
@@ -38,7 +46,7 @@ namespace VarlikZimmetDepoYonetim.UI
 			{
 				Description = tbDescription.Text,
 				Customer = new Customer() { CustomerId = int.Parse(tbSubscriberNo.Text)},
-				Product = new Product() { ProductId = product.ProductId }
+				Product = new Product() { ProductId = productId}
 			});
 			MessageBox.Show(insertedCustomer.ResultMessage);
 

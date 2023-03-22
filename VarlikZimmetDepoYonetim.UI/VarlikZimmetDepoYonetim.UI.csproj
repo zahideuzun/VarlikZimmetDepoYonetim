@@ -180,5 +180,17 @@
   <ItemGroup>
     <None Include="Resources\blue-search-icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_27.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

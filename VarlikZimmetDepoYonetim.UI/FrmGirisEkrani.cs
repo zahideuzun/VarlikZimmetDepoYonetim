@@ -17,13 +17,11 @@ namespace VarlikZimmetDepoYonetim.UI
 {
 	public partial class FrmGirisEkrani : Form
 	{
-		private SqlProviderService sqlProviderService;
 		private FrmAnaSayfa frmAnaSayfa;
-		private User loginUser;
 		public FrmGirisEkrani()
 		{
 			InitializeComponent();
-			tbUserPassword.PasswordChar = '*';
+			tbUserPassword.PasswordChar = '*'; //kullanici sifre girerken sifrenin yildizla maskelenmesini kontrol eden prop.
 		}
 
 		private void btnLogin_Click(object sender, EventArgs e)
@@ -31,23 +29,30 @@ namespace VarlikZimmetDepoYonetim.UI
 			Login();
 		}
 
+		/// <summary>
+		/// Kullanıcının mail adresi ve sifresini UserLoginDAL classindan database karsilastirmasini yaparak kullanıcı girisini kontrol eden ve bir sonraki forma yönlendiren metot.
+		/// </summary>
 		void Login()
 		{
-			UserLoginDAL userLogin = new UserLoginDAL();
-			UserRole userRole = userLogin.UserLogin(tbUserMailAddress.Text, tbUserPassword.Text);
+			UserLoginDAL userLoginDal = new UserLoginDAL();
+			UserRole userRole = userLoginDal.UserLogin(tbUserMailAddress.Text, tbUserPassword.Text);
 			if (userRole != null)
 			{
-				MessageBox.Show("Login successful.");
-				userRole.User = loginUser;
-				FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa(userRole,loginUser);
+				MessageBox.Show("Giriş başarılı.");
+				frmAnaSayfa = new FrmAnaSayfa(userRole);
 				frmAnaSayfa.Show();
 			}
 			else
 			{
-				MessageBox.Show("Invalid password.");
+				MessageBox.Show("Hatalı giriş!");
 			}
 		}
 
+		/// <summary>
+		/// Şifreyi göster checkboxina işaretlendiğinde sifreyi gösteren, işaretleme kaldırıldıgında şifreyi maskeleyen event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cbShowPassword_CheckedChanged(object sender, EventArgs e)
 		{
 			tbUserPassword.PasswordChar = cbShowPassword.Checked ? '\0' : '*';

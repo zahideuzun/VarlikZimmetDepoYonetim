@@ -12,12 +12,16 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class CurrencyDAL : ISelectRepo<Currency>
 	{
+		/// <summary>
+		/// Ürünlerin para birimlerini select sorgusuyla listeleyen list metodu.
+		/// </summary>
+		/// <returns></returns>
 		public List<Currency> Select()
 		{
 			List<Currency> currencies = null;
 			SqlDbService sqlDbService = new SqlDbService("select p.ParaBirimiId, p.ParaBirimiAdi from ParaBirimi p where p.AktifMi = 'True'");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

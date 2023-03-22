@@ -10,15 +10,19 @@ using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL
 {
+	
 	public class BrandDAL : ISelectRepo<Brand>
 	{
+		/// <summary>
+		/// Ürün markalarının database bağlantısını yapan list metodu.
+		/// </summary>
 		public List<Brand> Select()
 		{
 			List<Brand> brands = null;
 
 			SqlDbService sqlDbService = new SqlDbService("select m.MarkaId ,m.MarkaAdi from Marka m where m.AktifMi = 'True'");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

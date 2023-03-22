@@ -21,7 +21,6 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public double ProductCost { get; set; }
 		public string Description { get; set; }
 		public string FilePath { get; set; }
-		public ProductStatus ProductStatus { get; set; }
 		public Currency CostCurrency { get; set; }
 
 

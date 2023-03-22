@@ -12,13 +12,18 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class UserAssignmentDAL : ISelectRepoId<UserAssignment>
 	{
+		/// <summary>
+		/// Giris yapan kullanicinin kendisine zimmetlenmis ürünlerini kullanıcı zimmet tablosundan kullanıcı zimmet idsine göre getiren select metodu
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<UserAssignment> Select(int id)
 		{
 			List<UserAssignment> userAssignments = null;
 
-			SqlDbService sqlDbService = new SqlDbService($"select kz.KullaniciZimmetId [Kayıt No],u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from KullaniciZimmet kz \r\n\t inner join Kullanici k on kz.KullaniciId = k.KullaniciId\r\n\t inner join Zimmet z on kz.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunGrubu ug on u.UrunGrubuId= ug.UrunGrubuId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where kz.AktifMi = 'True' and kz.KullaniciId = {id} ");
+			SqlDbService sqlDbService = new SqlDbService($"select kz.KullaniciZimmetId [Kayıt No],u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from KullaniciZimmet kz \r\n\t inner join Kullanici k on kz.KullaniciId = k.KullaniciId\r\n\t inner join Zimmet z on kz.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunGrubu ug on u.UrunGrubuId= ug.UrunGrubuId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where kz.AktifMi = 'True' and fy.AktifMi = 'True' and kz.KullaniciId = {id} ");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

@@ -14,13 +14,17 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class ProductDAL : ISelectRepo<Product> , ISelectRepoId<Product>, IUpdateRepo<Product>
 	{
+		/// <summary>
+		/// Ürün/varlık listeleme ekranına tüm varliklarin istenilen sütunlarinin select sorgusuyla listelendigi metod.
+		/// </summary>
+		/// <returns></returns>
 		public List<Product> Select()
 		{
 			List<Product> products = null;
 
 			SqlDbService sqlDbService = new SqlDbService("select u.UrunId as [Kayıt Numarası], u.BarkodNo, ut.UrunTipiAdi as [Ürün Tipi], f.GuncelFiyat as [Ürünün Güncel Fiyatı], mr.MarkaAdi as Marka, \r\nmo.ModelAdi as Model from Urun u \r\njoin UrunTipi ut on u.UrunTipiId = ut.UrunTipiId\r\njoin Marka mr on mr.MarkaId = u.MarkaId\r\njoin Model mo on mo.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId where u.AktifMi = 'True'");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{
@@ -45,12 +49,17 @@ namespace VarlikZimmetDepoYonetim.DAL
 			
 		}
 
+		/// <summary>
+		/// Ürün güncelleme/varlık bilgileri ekraninda istenen ürün bilgilerini ürünid değerine göre listeleyen select metodu.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<Product> Select(int id)
 		{
 			List<Product> productsInfo = null;
-			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ut.UrunTipiId [ürün tipi id] , ut.UrunTipiAdi [Ürün Tipi], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.GuncelFiyat [Güncel Fiyat], u.UrunId from Urun u\r\njoin UrunTipi ut on ut.UrunTipiId = u.UrunTipiId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.AktifMi = 'True' and u.UrunId = {id}");
+			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ut.UrunTipiId [ürün tipi id] , ut.UrunTipiAdi [Ürün Tipi], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.GuncelFiyat [Güncel Fiyat], u.UrunId from Urun u\r\njoin UrunTipi ut on ut.UrunTipiId = u.UrunTipiId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.AktifMi = 'True' and f.AktifMi = 'True' and u.UrunId = {id}");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{
@@ -97,6 +106,11 @@ namespace VarlikZimmetDepoYonetim.DAL
 
 		}
 
+		/// <summary>
+		/// Ürün güncelleme ekranindaki güncellenebilen ürün bilgilerini yapan update metodu.
+		/// </summary>
+		/// <param name="updatedData"></param>
+		/// <returns></returns>
 		public MyResult Update(Product updatedData)
 		{
 			SqlDbService sqlDbService = new SqlDbService("update Urun set \r\n GarantiliMi = @GarantiliMi, \r\n    Aciklama = @Aciklama \r\n where UrunId = @UrunId");

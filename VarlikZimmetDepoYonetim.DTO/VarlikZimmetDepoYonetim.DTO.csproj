@@ -47,6 +47,7 @@
     <Compile Include="ProductStatus.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Result\MyResult.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="Warehouse.cs" />
     <Compile Include="Announcement.cs" />
     <Compile Include="Team.cs" />

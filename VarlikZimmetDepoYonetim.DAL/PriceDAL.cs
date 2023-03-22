@@ -14,13 +14,17 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class PriceDAL : ISelectRepoId<Price> , IInsertRepo<Price>
 	{
-		
+		/// <summary>
+		/// Ürünlerin fiyatlarını fiyat tablosundaki ürünid değerine göre select sorgusuyla listeleyen metot.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<Price> Select(int id)
 		{
 			List<Price> prices = null;
 			SqlDbService sqlDbService = new SqlDbService($"select f.FiyatId, f.GuncelFiyat, pb.ParaBirimiId, pb.ParaBirimiAdi from Fiyat f \r\njoin ParaBirimi pb on f.ParaBirimiId=pb.ParaBirimiId \r\nwhere f.AktifMi = 'True' and f.UrunId = {id}");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{
@@ -42,6 +46,12 @@ namespace VarlikZimmetDepoYonetim.DAL
 			sqlDbService.Close();
 			return prices;
 		}
+
+		/// <summary>
+		/// Ürün bilgilerini güncelleme ekraninda güncellenen fiyat bilgisini fiyat tablosuna ekleyen insert metodu. Ürün fiyat bilgilerinin tüm geçmişi görüntülenebilsin diye ürünlerin fiyat bilgileri ayri bir fiyat tablosunda tutuldu.
+		/// </summary>
+		/// <param name="insertedData"></param>
+		/// <returns></returns>
 		public MyResult Insert(Price insertedData)
 		{
 			SqlDbService sqlDbService = new SqlDbService("insert into Fiyat (UrunId, GuncelFiyat,GuncellemeTarihi,ParaBirimiId, AktifMi) values (@UrunId, @GuncelFiyat, @GuncellemeTarihi, @ParaBirimiId, @AktifMi)");

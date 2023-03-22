@@ -12,10 +12,12 @@ namespace VarlikZimmetDepoYonetim.Provider
 	{
 		private SqlConnection conn;
 		private SqlCommand cmd;
-		SqlTransaction tran;
-		private SqlCommand[] sqlCommands = new SqlCommand[2]; 
-
-
+		
+		/// <summary>
+		/// Database baglantisini yapan parametreli constructor. 
+		/// </summary>
+		/// <param name="connectionQuery"></param>
+		/// <param name="connectionString"></param>
 		public SqlDbService(string connectionQuery, string connectionString = "server=.\\SQLEXPRESS;database=VarlikZimmetDepo;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
 		{
 			conn = new SqlConnection(connectionString);
@@ -24,176 +26,58 @@ namespace VarlikZimmetDepoYonetim.Provider
 			cmd.Connection = conn;
 		}
 
-		public SqlDbService(string connectionQuery1, string connectionQuery2,
-			string connectionString =
-				"server=.\\SQLEXPRESS;database=VarlikZimmetDepo;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
-		{
-			conn = new SqlConnection(connectionString);
-			sqlCommands[0] = new SqlCommand(connectionQuery1, conn);
-			sqlCommands[1] = new SqlCommand(connectionQuery2, conn);
-		}
-
+		/// <summary>
+		/// SqlParameter tipinde sorgulara parametre eklemeyi saglayan özellestirilmis metot.
+		/// </summary>
+		/// <param name="sqlParameters"></param>
 		public void AddParameters(SqlParameter[] sqlParameters)
 		{
 			cmd.Parameters.AddRange(sqlParameters);
 		}
 
+		/// <summary>
+		/// Database baglantisini acan özellestirilmis metot.
+		/// </summary>
 		public void Open()
 		{
 			if (conn.State == ConnectionState.Closed) conn.Open();
 		}
+
+		/// <summary>
+		/// Database bağlantısını kapatan özellestirilmis metot.
+		/// </summary>
 		public void Close()
 		{
 			if (conn.State == ConnectionState.Open) conn.Close();
 		}
 
-		public SqlDataReader ExReader()
+		/// <summary>
+		/// SqlDataReader tipindeki, select sorgularinda kullanilan veri okuma metodu.
+		/// </summary>
+		/// <returns></returns>
+		public SqlDataReader ExecuteReader()
 		{
 			return cmd.ExecuteReader();
 		}
+
+		/// <summary>
+		/// Insert, update, delete (DDL) sorgularindan etkilenen satır sayisini int tipinde dönen metot.
+		/// </summary>
+		/// <returns></returns>
 		public int ExecuteNonQuery()
 		{
 			return cmd.ExecuteNonQuery();
 		}
 
-
-		public void TransactionFoksiyonu()
-		{
-
-			Open();
-
-			SqlTransaction transaction = conn.BeginTransaction(); ;
-			foreach (SqlCommand command in sqlCommands)
-			{
-
-				command.Transaction = transaction;
-			}
-			try
-			{
-
-				foreach (SqlCommand command in sqlCommands)
-				{
-					command.ExecuteNonQuery();
-				}
-				transaction.Commit();
-			}
-			catch (Exception ex)
-			{
-				transaction?.Rollback();
-				Console.WriteLine("Transaction geri alındı." + ex.Message);
-			}
-			finally
-			{
-				Open();
-			}
-		}
-
-
-
-
+		/// <summary>
+		/// Tek satır, tek sütun veri dönmek istedigimde kullanilan object dönen özellestirilmis metot.
+		/// </summary>
+		/// <returns></returns>
 		public object ExecuteScalar()
 		{
 			return cmd.ExecuteScalar();
 		}
 
-		public void ExecuteTransaction(string queryType, string command, SqlParameter[] parameter)
-		{
-			Open();
-			tran = conn.BeginTransaction();
-			cmd.CommandText = command;
-			cmd.Transaction = tran;
-			int etkilenenSatirSayisi = 0;
-			try
-			{
-				if (parameter != null)
-				{
-					AddParameters(parameter);
-				}
-
-				if (queryType == "insert" || queryType == "update" || queryType == "delete")
-				{
-					etkilenenSatirSayisi = ExecuteNonQuery();
-					if (etkilenenSatirSayisi == 0)
-					{
-						throw new Exception("hata");
-					}
-				}
-				else
-				{
-					throw new Exception("hata");
-				}
-
-				cmd.Parameters.Clear();
-				tran.Commit();
-
-			}
-			catch (Exception ex)
-			{
-				tran.Rollback();
-
-			}
-			finally
-			{
-				Close();
-			}
-		}
-
-		public void ExecuteTransaction(string[] commands, SqlParameter[] parameter)
-		{
-			Open();
-			tran = conn.BeginTransaction();
-			try
-			{
-				if (parameter != null)
-				{
-					AddParameters(parameter);
-				}
-				foreach (string command in commands)
-				{
-					cmd = new SqlCommand(command, conn, tran);
-					int etkilenenSatirSayisi = cmd.ExecuteNonQuery();
-					if (etkilenenSatirSayisi == 0)
-					{
-						throw new Exception("hata");
-					}
-				}
-				tran.Commit();
-			}
-			catch (Exception ex)
-			{
-				tran.Rollback();
-			}
-			finally
-			{
-				Close();
-			}
-		}
-
-		public void ExecuteTransaction(string[] commands)
-		{
-			Open();
-			tran = conn.BeginTransaction();
-			try
-			{
-				foreach (string command in commands)
-				{
-					cmd = new SqlCommand(command, conn, tran);
-					int etkilenenSatirSayisi = cmd.ExecuteNonQuery();
-					if (etkilenenSatirSayisi == 0)
-					{
-						throw new Exception("hata");
-					}
-				}
-				tran.Commit();
-			}
-			catch (Exception ex)
-			{
-				tran.Rollback();
-			}
-			finally
-			{
-				Close();
-			}
-		}
+		
 	}
 }

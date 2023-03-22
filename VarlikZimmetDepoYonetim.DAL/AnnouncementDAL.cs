@@ -10,15 +10,19 @@ using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL
 {
+	
 	public class AnnouncementDAL : ISelectRepo<Announcement>
 	{
+		/// <summary>
+		/// Menüdeki duyurular sekmesinin database baglantisini yapan list metodu.
+		/// </summary>
 		public List<Announcement> Select()
 		{
 			List<Announcement> announcements = null;
 
 			SqlDbService sqlDbService = new SqlDbService("select d.DuyuruAdi Duyuru, d.DuyuruIcerigi İçeriği  from Duyuru d");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

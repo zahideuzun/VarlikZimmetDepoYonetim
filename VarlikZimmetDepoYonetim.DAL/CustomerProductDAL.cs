@@ -15,7 +15,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 	{
 		public MyResult Insert(CustomerProduct insertedData)
 		{
-			SqlDbService sqlDbService = new SqlDbService("insert into MusteriUrun (UrunId, Aciklama,MusteriId,AktifMi) values (@UrunId, @Aciklama, @MusteriId, @AktifMi");
+			SqlDbService sqlDbService = new SqlDbService("insert into MusteriUrun (UrunId, Aciklama,MusteriId,AktifMi) values (@UrunId, @Aciklama, @MusteriId, @AktifMi)");
 			sqlDbService.Open();
 			List<SqlParameter> parameters = new List<SqlParameter>();
 			parameters.Add(new SqlParameter("@MusteriId", insertedData.Product.ProductId));

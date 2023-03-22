@@ -15,15 +15,16 @@ namespace VarlikZimmetDepoYonetim.UI
 {
 	public partial class FrmVarliklar : Form
 	{
+		#region Instances
+
 		private UserRole userRole = new UserRole();
-		private FrmVarlikBilgileri frmVarlikBilgileri;
-		private User user;
-		private List<TeamAssignment> teamAssignments;
+		List<TeamAssignment> teamAssignments = new List<TeamAssignment>();
 		List<UserAssignment> userAssignments;
 		private UserAssignment selectedUserAssignment;
 		private List<Product> products;
 		private Product selectedProduct;
-		private User loginUser;
+
+		#endregion
 
 		public FrmVarliklar()
 		{
@@ -31,11 +32,11 @@ namespace VarlikZimmetDepoYonetim.UI
 		}
 
 
-		public FrmVarliklar(UserRole userRole, User loginUser) : this()
+		public FrmVarliklar(UserRole userRole) : this()
 		{
 			lblAllProducts.Enabled = false;
 			this.userRole = userRole;
-			this.loginUser = loginUser;
+			
 		}
 
 		private void FrmVarliklar_Load(object sender, EventArgs e)
@@ -43,11 +44,16 @@ namespace VarlikZimmetDepoYonetim.UI
 			if (userRole.Role.RoleName == "PowerUser" || userRole.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
 		}
 
+		/// <summary>
+		/// Giris yapan kullanicinin ekibine ait ürünleri listeleyen event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void lblTeamProducts_Click(object sender, EventArgs e)
 		{
 			lstProductList.Items.Clear();
 			TeamAssignmentDAL teamAssignmentDal = new TeamAssignmentDAL();
-			List<TeamAssignment> teamAssignments = teamAssignmentDal.Select(loginUser.UserId);
+			teamAssignments = teamAssignmentDal.Select(userRole.User.Team.TeamId);
 			foreach (TeamAssignment teamAssignment in teamAssignments)
 			{
 				ListViewItem h1 = new ListViewItem(teamAssignment.TeamAssignmentId.ToString());
@@ -61,6 +67,11 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 		}
 
+		/// <summary>
+		/// Giris yapan kullanici Depo Admin ya da Power User ise sistemde kayitli tüm varliklari görebilir. Bu click yalnizca bu rollere aciktir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void lblAllProducts_Click(object sender, EventArgs e)
 		{
 			ProductDAL productDAL = new ProductDAL();
@@ -79,11 +90,16 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 		}
 
+		/// <summary>
+		/// Giriş yapan kullanicinin kendisine zimmetlenmis ürünleri görebildigi
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void lblMyProducts_Click(object sender, EventArgs e)
 		{
 			lstProductList.Items.Clear();
 			UserAssignmentDAL userAssignmentDal = new UserAssignmentDAL();
-			List<UserAssignment> userAssignments = userAssignmentDal.Select(loginUser.UserId);
+			List<UserAssignment> userAssignments = userAssignmentDal.Select(userRole.User.UserId);
 			
 			foreach (UserAssignment userAssignment in userAssignments)
 			{
@@ -139,6 +155,17 @@ namespace VarlikZimmetDepoYonetim.UI
 				this.Tag = selectedProduct;
 			}
 		}
-		
+
+		private void pbAnnouncement_Click(object sender, EventArgs e)
+		{
+			FrmDuyurular frmDuyurular = new FrmDuyurular();
+			frmDuyurular.Show();
+		}
+
+		private void pbQuestions_Click(object sender, EventArgs e)
+		{
+			FrmSSSorular frmSsSorular = new FrmSSSorular();
+			frmSsSorular.Show();
+		}
 	}
 }

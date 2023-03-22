@@ -12,12 +12,16 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class ProductTypeDAL : ISelectRepo<ProductType>
 	{
+		/// <summary>
+		/// Ürün tiplerini select sorgusuyla databaseden listeleyen select metodu.
+		/// </summary>
+		/// <returns></returns>
 		public List<ProductType> Select()
 		{
 			List<ProductType> productTypes = null;
-			SqlDbService sqlDbService = new SqlDbService($"select ut.UrunTipiId, ut.UrunTipiAdi from UrunTipi ut where ut.AktifMi = 'True'");
+			SqlDbService sqlDbService = new SqlDbService("select ut.UrunTipiId, ut.UrunTipiAdi from UrunTipi ut where ut.AktifMi = 'True'");
 			sqlDbService.Open();
-			SqlDataReader reader = sqlDbService.ExReader();
+			SqlDataReader reader = sqlDbService.ExecuteReader();
 
 			if (reader.HasRows)
 			{

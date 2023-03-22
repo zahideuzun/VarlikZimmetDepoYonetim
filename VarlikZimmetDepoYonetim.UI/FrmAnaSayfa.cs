@@ -16,7 +16,6 @@ namespace VarlikZimmetDepoYonetim.UI
 		private FrmVarliklar frmVarliklar;
 		private FrmVarlikBilgileri frmVarlikBilgileri;
 		private UserRole userRole;
-		private User loginUser;
 		private FrmSSSorular frmSsSorular;
 
 		public FrmAnaSayfa()
@@ -25,15 +24,15 @@ namespace VarlikZimmetDepoYonetim.UI
 		}
 
 
-		public FrmAnaSayfa(UserRole userRole, User loginUser) : this()
+		public FrmAnaSayfa(UserRole userRole) : this()
 		{
 			this.userRole = userRole;
-			this.loginUser = loginUser;
+			
 		}
 
 		private void allProductsListToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			frmVarliklar = new FrmVarliklar(userRole, loginUser);
+			frmVarliklar = new FrmVarliklar(userRole);
 			frmVarliklar.MdiParent = this;
 			frmVarliklar.Show();
 		}

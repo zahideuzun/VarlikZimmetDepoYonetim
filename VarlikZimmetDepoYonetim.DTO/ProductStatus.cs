@@ -9,6 +9,7 @@ namespace VarlikZimmetDepoYonetim.DTO
 	public class ProductStatus : BaseDTO 
 	{
 		public int ProductStatusId { get; set; }
-		public string ProductStatusName { get; set; }
+		public Status Status { get; set; }
+		public Product Product { get; set; }
 	}
 }

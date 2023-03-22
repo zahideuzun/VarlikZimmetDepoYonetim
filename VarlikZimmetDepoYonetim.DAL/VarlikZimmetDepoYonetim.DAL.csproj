@@ -54,6 +54,7 @@
     <Compile Include="ModelDAL.cs" />
     <Compile Include="PriceDAL.cs" />
     <Compile Include="ProductDAL.cs" />
+    <Compile Include="ProductStatusDAL.cs" />
     <Compile Include="ProductTypeDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QuestionDAL.cs" />

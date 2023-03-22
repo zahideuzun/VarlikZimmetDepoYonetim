@@ -26,12 +26,14 @@ namespace VarlikZimmetDepoYonetim.UI
 		List<Currency> currencies;
 		List<Product> products;
 		List<ProductType> productTypes;
+		List<Brand> brands;
 		private ProductDAL productDal;
 		private CurrencyDAL currencyDAL;
 		private PriceDAL priceDAL;
 		private ProductTypeDAL productTypeDal;
 		private BrandDAL brandDal;
 		Product product;
+		private ProductStatusDAL statusDal;
 
 		#endregion
 
@@ -40,27 +42,40 @@ namespace VarlikZimmetDepoYonetim.UI
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Bir önceki formdan (varliklar) gönderilen kullanici zimmet bilgisini karsilayan parametreli const.
+		/// </summary>
+		/// <param name="selectedUserAssignment"></param>
 		public FrmVarlikBilgileri(UserAssignment selectedUserAssignment) : this()
 		{
 			this.selectedUserAssignment = selectedUserAssignment;
 		}
 
+		/// <summary>
+		/// Bir önceki formdan (Varliklar) secilen ürünün bu formda karsilandigi parametreli constructor.
+		/// </summary>
+		/// <param name="selectedProduct"></param>
 		public FrmVarlikBilgileri(Product selectedProduct) : this() 
 		{
 			this.selectedProduct = selectedProduct;
 		}
 
+		/// <summary>
+		/// Secilen varlikla ilgili aksiyonlarin kontrollerini yapan event. İstenen yalnizca tüketme ve zimmet atama ekranlari oldugu icin yalnizca onlarin kontrolü saglanmistir. Tüm aksiyonlar listelenmekte fakat onlara erişim sağlanmamaktadır.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cmbActions_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (cmbActions.SelectedItem == "Zimmet Ata")
 			{
-				zimmetAtama = new FrmZimmetAtama(product.ProductId);
+				zimmetAtama = new FrmZimmetAtama(products[0].ProductId);
 				zimmetAtama.Show();
 			}
 
 			else if (cmbActions.SelectedItem == "Tüket")
 			{
-				tuket = new FrmTuket(product.ProductId);
+				tuket = new FrmTuket(products[0].ProductId);
 				tuket.Show();
 			}
 			else MessageBox.Show("Bu sayfaya giriş yetkiniz yok!");
@@ -72,6 +87,9 @@ namespace VarlikZimmetDepoYonetim.UI
 			FormLoad();
 		}
 
+		/// <summary>
+		/// Form yüklendiginde yüklenmesi gereken tüm kontroller bu metottda yapildi.
+		/// </summary>
 		void FormLoad()
 		{
 			#region Instances
@@ -80,16 +98,7 @@ namespace VarlikZimmetDepoYonetim.UI
 			priceDAL = new PriceDAL();
 			productTypeDal = new ProductTypeDAL();
 			brandDal = new BrandDAL();
-
-
 			#endregion
-
-			ListViewItem h1 = new ListViewItem(selectedProduct.EntryDate.ToString());
-			//h1.SubItems.Add(selectedProduct.CreatedById.ToString() = "zahide");
-			//h1.SubItems.Add(selectedProduct.ProductStatus.ProductStatusName);
-			h1.SubItems.Add(selectedProduct.Description);
-			lstProductStatus.Items.Add(h1);
-
 
 			#region EnabledControl
 			cmbUnit.Enabled = false;
@@ -107,19 +116,28 @@ namespace VarlikZimmetDepoYonetim.UI
 
 			#region FormLoadControls
 
+			#region SelectedProductControl
+
+			//secilen varligin kullanici tarafindan ve poweruser tarafindan secilip secilmedigini kontrol eder. eger kullanici tarafindan secilmisse kullanici yalnizca zimmetlenmis varliklarini görebildigi icin kullanici zimmetteki varlik id olarak geliyor. poweruser ise tüm varliklari görebildigi icin varlik id olarak geliyor.
+
 			if (selectedProduct == null)
 			{
 				prices = priceDAL.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
 				products = productDal.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
-				//lblProductName.Text = selectedUserAssignment.InventoryAssignment.Product.ProductId.ToString();
+				lblProductName.Text = selectedUserAssignment.InventoryAssignment.Product.ProductId.ToString();
 			}
 			else
 			{
 				prices = priceDAL.Select(selectedProduct.ProductId);
 				products = productDal.Select(selectedProduct.ProductId);
-				//lblProductName.Text = selectedProduct.ProductId.ToString();
+				lblProductName.Text = selectedProduct.ProductId.ToString();
 			}
 
+
+			#endregion
+
+			#region FormLoadAddItems
+			//Formdaki ilgili bölümlerin doldurulduğu kodlar.
 
 			currencies = currencyDAL.Select();
 			productTypes = productTypeDal.Select();
@@ -134,7 +152,7 @@ namespace VarlikZimmetDepoYonetim.UI
 			cmbProductCurrency.SelectedItem = (products[0].ProductCost);
 			cmbProductCurrency.Text = products[0].CostCurrency.CurrencyName;
 			tbDescription.Text = products[0].Description;
-			tbProductCurrentPrice.Text = prices[0] .CurrentPrice.ToString();
+			tbProductCurrentPrice.Text = prices[0].CurrentPrice.ToString();
 			cmbProductPriceCurrency.Items.AddRange(currencies.ToArray());
 			cmbProductPriceCurrency.SelectedItem = prices[0].Currency;
 			cmbProductPriceCurrency.Text = prices[0].Currency.CurrencyName;
@@ -143,9 +161,17 @@ namespace VarlikZimmetDepoYonetim.UI
 			cmbModel.SelectedItem = products[0].Model;
 			cmbModel.Text = products[0].Model.ToString();
 
+
+			#endregion
+
 			#endregion
 		}
 
+		/// <summary>
+		/// Ürün güncelleme ekraninda, model bilgileri marka secildikten sonra markaya göre modelleri getirmektedir.Analiz raporunda bu ekran hakkında guncellemeler eksik verilmis bu sebeple ürünün marka ve modeli developer tarafindan güncellemeye kapatilmistir. Su an kullanilan bir event degil. Fakat analiz detaylandirildiginda kullanim ihtiyaci dogabilir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cmbBrand_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			cmbModel.Enabled = true;
@@ -155,39 +181,48 @@ namespace VarlikZimmetDepoYonetim.UI
 			models = modelDAL.Select(selectedBrand.BrandId);
 			cmbModel.Items.Clear();
 			cmbModel.Items.AddRange(models.ToArray());
-
 		}
 
+		/// <summary>
+		/// İsaretlendiginde barkodsuz ürünler için alınması gereken bilgilerin alanlarini enabled=true yapan event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cbProductWithoutBarcode_CheckedChanged(object sender, EventArgs e)
 		{
 			cmbUnit.Enabled = lblAmount.Enabled = (cbProductWithoutBarcode.Checked ? true : false);
 
 		}
 
-		
 		private void btnUpdateProduct_Click(object sender, EventArgs e)
 		{
-			
+			ProductUpdate();
+		}
+
+		/// <summary>
+		/// Varlik Bilgileri formundaki ürünün güncellenebilir bilgilerini güncelleyen metot. Güncelle clickte cagirilmistir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		void ProductUpdate()
+		{
 			bool IsWarrantyValid = cmbGuarente.SelectedIndex == 0;
-			foreach (var item in products)
-			{
-				product = item as Product;
-			}
+
 			MyResult returnResult = productDal.Update(new Product()
 			{
-				ProductId = product.ProductId,
+				ProductId = products[0].ProductId,
 				IsWarrantyValid = IsWarrantyValid,
 				Description = tbDescription.Text
 			});
+
 			MyResult returnPriceResult = priceDAL.Insert(new Price()
 			{
 				CurrentPrice = double.Parse(tbProductCurrentPrice.Text),
-				Currency = new Currency() {CurrencyId = (cmbProductPriceCurrency.SelectedItem as Currency).CurrencyId},
-				Product = new Product() {ProductId = product.ProductId }
-				
-
+				Currency = new Currency() { CurrencyId = (cmbProductPriceCurrency.SelectedItem as Currency).CurrencyId },
+				Product = new Product() { ProductId = products[0].ProductId }
 			});
-			MessageBox.Show($"{returnResult.ResultMessage} ve {returnPriceResult.ResultMessage} başarıyla güncellendi!" );
+
+			MessageBox.Show($"{returnResult.ResultMessage} ve {returnPriceResult.ResultMessage} başarıyla güncellendi!");
 		}
 	}
 }
