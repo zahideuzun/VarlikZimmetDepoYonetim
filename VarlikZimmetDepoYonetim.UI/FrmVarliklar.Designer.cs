@@ -161,7 +161,6 @@
 			this.lstProductList.TabIndex = 10;
 			this.lstProductList.UseCompatibleStateImageBehavior = false;
 			this.lstProductList.View = System.Windows.Forms.View.Details;
-			this.lstProductList.SelectedIndexChanged += new System.EventHandler(this.lstProductList_SelectedIndexChanged);
 			// 
 			// columnHeader1
 			// 

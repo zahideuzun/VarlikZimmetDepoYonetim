@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VarlikZimmetDepoYonetim.DAL;
 using VarlikZimmetDepoYonetim.DTO;
+using VarlikZimmetDepoYonetim.DTO.Result;
 
 namespace VarlikZimmetDepoYonetim.UI
 {
@@ -83,6 +84,11 @@ namespace VarlikZimmetDepoYonetim.UI
 
 			#endregion
 
+			ListViewItem h1 = new ListViewItem(selectedProduct.EntryDate.ToString());
+			h1.SubItems.Add(selectedProduct.CreatedBy = "Zahide Uzun");
+			//h1.SubItems.Add(selectedProduct.ProductStatus.ProductStatusName);
+			h1.SubItems.Add(selectedProduct.Description);
+			lstProductStatus.Items.Add(h1);
 
 
 			#region EnabledControl
@@ -91,6 +97,11 @@ namespace VarlikZimmetDepoYonetim.UI
 			cmbModel.Enabled = false;
 			dtpProductRetirementDate.Enabled = false;
 			tbBarcode.Enabled = false;
+			cmbBrand.Enabled = false;
+			cmbProductCurrency.Enabled = false;
+			cmbProductType.Enabled = false;
+			tbProductCost.Enabled = false;
+			dtpProductDateOfEntry.Enabled = false;
 			#endregion
 
 
@@ -100,55 +111,35 @@ namespace VarlikZimmetDepoYonetim.UI
 			{
 				prices = priceDAL.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
 				products = productDal.Select(selectedUserAssignment.InventoryAssignment.Product.ProductId);
-				lblProductName.Text = selectedUserAssignment.InventoryAssignment.Product.ProductId.ToString();
+				//lblProductName.Text = selectedUserAssignment.InventoryAssignment.Product.ProductId.ToString();
 			}
 			else
 			{
 				prices = priceDAL.Select(selectedProduct.ProductId);
 				products = productDal.Select(selectedProduct.ProductId);
-				lblProductName.Text = selectedProduct.ProductId.ToString();
+				//lblProductName.Text = selectedProduct.ProductId.ToString();
 			}
 
-
-			ListViewItem h1 = new ListViewItem(selectedProduct.EntryDate.ToString());
-			h1.SubItems.Add(selectedProduct.CreatedBy = "Zahide Uzun");
-			//h1.SubItems.Add(selectedProduct.ProductStatus.ProductStatusName);
-			h1.SubItems.Add(selectedProduct.Description);
-			lstProductStatus.Items.Add(h1);
 
 			currencies = currencyDAL.Select();
 			productTypes = productTypeDal.Select();
 			brands = brandDal.Select();
-
-			cmbBrand.Items.AddRange(brands.ToArray());
 			tbBarcode.Text = products[0].ProductBarcode.ToString();
-
-			cmbProductType.Items.AddRange(productTypes.ToArray());
 			cmbProductType.SelectedItem = productTypes[0].ProductTypeName;
 			cmbProductType.Text = products[0].ProductType.ProductTypeName;
-
 			cmbGuarente.SelectedItem = (products[0].IsWarrantyValid ? 1 : 0);
 			cmbGuarente.Text = products[0].IsWarrantyValid ? "Evet" : "Hayır";
-
 			tbProductCost.Text = products[0].ProductCost.ToString();
-
 			dtpProductDateOfEntry.Value = products[0].EntryDate;
-
-			cmbProductCurrency.Items.AddRange(currencies.ToArray());
 			cmbProductCurrency.SelectedItem = (products[0].ProductCost);
 			cmbProductCurrency.Text = products[0].CostCurrency.CurrencyName;
-
 			tbDescription.Text = products[0].Description;
-			
 			tbProductCurrentPrice.Text = prices[0] .CurrentPrice.ToString();
-
 			cmbProductPriceCurrency.Items.AddRange(currencies.ToArray());
 			cmbProductPriceCurrency.SelectedItem = prices[0];
 			cmbProductPriceCurrency.Text = prices[0].Currency.CurrencyName;
-
 			cmbBrand.SelectedItem = products[0].Brand;
 			cmbBrand.Text = products[0].Brand.ToString();
-
 			cmbModel.SelectedItem = products[0].Model;
 			cmbModel.Text = products[0].Model.ToString();
 
@@ -171,6 +162,31 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			cmbUnit.Enabled = lblAmount.Enabled = (cbProductWithoutBarcode.Checked ? true : false);
 
+		}
+
+		Product product;
+		private void btnUpdateProduct_Click(object sender, EventArgs e)
+		{
+			
+			bool IsWarrantyValid = cmbGuarente.SelectedIndex == 0;
+			foreach (var item in products)
+			{
+				product = item as Product;
+			}
+			MyResult returnResult = productDal.Update(new Product()
+			{
+				ProductId = product[0].Id,
+				IsWarrantyValid = IsWarrantyValid,
+				Description = tbDescription.Text
+			});
+			MyResult returnPriceResult = priceDAL.Insert(new Price()
+			{
+				CurrentPrice = Convert.ToDouble(tbProductCurrentPrice),
+				Currency = new Currency() {CurrencyId = cmbProductPriceCurrency.SelectedIndex}
+				
+
+			});
+			MessageBox.Show($"{returnResult.ResultMessage} ve {returnPriceResult.ResultMessage} başarıyla güncellendi!" );
 		}
 	}
 }

@@ -13,6 +13,8 @@ namespace VarlikZimmetDepoYonetim.Provider
 		private SqlConnection conn;
 		private SqlCommand cmd;
 		SqlTransaction tran;
+		private SqlCommand[] sqlCommands = new SqlCommand[2]; 
+
 
 		public SqlDbService(string connectionQuery, string connectionString = "server=.\\SQLEXPRESS;database=VarlikZimmetDepo;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
 		{
@@ -21,6 +23,16 @@ namespace VarlikZimmetDepoYonetim.Provider
 			cmd.CommandText = connectionQuery;
 			cmd.Connection = conn;
 		}
+
+		public SqlDbService(string connectionQuery1, string connectionQuery2,
+			string connectionString =
+				"server=.\\SQLEXPRESS;database=VarlikZimmetDepo;user id=sa;password=sa;multipleactiveresultsets=true;trustservercertificate=true;")
+		{
+			conn = new SqlConnection(connectionString);
+			sqlCommands[0] = new SqlCommand(connectionQuery1, conn);
+			sqlCommands[1] = new SqlCommand(connectionQuery2, conn);
+		}
+
 		public void AddParameters(SqlParameter[] sqlParameters)
 		{
 			cmd.Parameters.AddRange(sqlParameters);

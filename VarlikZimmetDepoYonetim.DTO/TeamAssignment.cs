@@ -8,6 +8,7 @@ namespace VarlikZimmetDepoYonetim.DTO
 {
 	public class TeamAssignment : BaseDTO
 	{
+		public int TeamAssignmentId { get; set; }
 		public Team Team { get; set; }
 		public InventoryAssignment InventoryAssignment { get; set; }
 		public DateTime AssignmentStartDate { get; set; }

@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.grbProductInfo = new System.Windows.Forms.GroupBox();
+			this.cbProductWithoutBarcode = new System.Windows.Forms.CheckBox();
 			this.numAmount = new System.Windows.Forms.NumericUpDown();
 			this.cmbUnit = new System.Windows.Forms.ComboBox();
 			this.label8 = new System.Windows.Forms.Label();
@@ -67,12 +68,12 @@
 			this.cmbActions = new System.Windows.Forms.ComboBox();
 			this.label19 = new System.Windows.Forms.Label();
 			this.lstProductStatus = new System.Windows.Forms.ListView();
-			this.lblProductName = new System.Windows.Forms.Label();
-			this.cbProductWithoutBarcode = new System.Windows.Forms.CheckBox();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.lblProductName = new System.Windows.Forms.Label();
+			this.btnUpdateProduct = new System.Windows.Forms.Button();
 			this.grbProductInfo.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numAmount)).BeginInit();
 			this.SuspendLayout();
@@ -80,6 +81,7 @@
 			// grbProductInfo
 			// 
 			this.grbProductInfo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+			this.grbProductInfo.Controls.Add(this.btnUpdateProduct);
 			this.grbProductInfo.Controls.Add(this.cbProductWithoutBarcode);
 			this.grbProductInfo.Controls.Add(this.numAmount);
 			this.grbProductInfo.Controls.Add(this.cmbUnit);
@@ -117,6 +119,18 @@
 			this.grbProductInfo.TabIndex = 0;
 			this.grbProductInfo.TabStop = false;
 			this.grbProductInfo.Text = "Ürün Bilgileri";
+			// 
+			// cbProductWithoutBarcode
+			// 
+			this.cbProductWithoutBarcode.AutoSize = true;
+			this.cbProductWithoutBarcode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.cbProductWithoutBarcode.Location = new System.Drawing.Point(28, 36);
+			this.cbProductWithoutBarcode.Name = "cbProductWithoutBarcode";
+			this.cbProductWithoutBarcode.Size = new System.Drawing.Size(134, 23);
+			this.cbProductWithoutBarcode.TabIndex = 8;
+			this.cbProductWithoutBarcode.Text = "Barkodsuz Ürün";
+			this.cbProductWithoutBarcode.UseVisualStyleBackColor = true;
+			this.cbProductWithoutBarcode.CheckedChanged += new System.EventHandler(this.cbProductWithoutBarcode_CheckedChanged);
 			// 
 			// numAmount
 			// 
@@ -499,27 +513,6 @@
 			this.lstProductStatus.UseCompatibleStateImageBehavior = false;
 			this.lstProductStatus.View = System.Windows.Forms.View.Details;
 			// 
-			// lblProductName
-			// 
-			this.lblProductName.AutoSize = true;
-			this.lblProductName.Location = new System.Drawing.Point(52, 27);
-			this.lblProductName.Name = "lblProductName";
-			this.lblProductName.Size = new System.Drawing.Size(48, 13);
-			this.lblProductName.TabIndex = 6;
-			this.lblProductName.Text = "Ürün Adı";
-			// 
-			// cbProductWithoutBarcode
-			// 
-			this.cbProductWithoutBarcode.AutoSize = true;
-			this.cbProductWithoutBarcode.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-			this.cbProductWithoutBarcode.Location = new System.Drawing.Point(28, 36);
-			this.cbProductWithoutBarcode.Name = "cbProductWithoutBarcode";
-			this.cbProductWithoutBarcode.Size = new System.Drawing.Size(134, 23);
-			this.cbProductWithoutBarcode.TabIndex = 8;
-			this.cbProductWithoutBarcode.Text = "Barkodsuz Ürün";
-			this.cbProductWithoutBarcode.UseVisualStyleBackColor = true;
-			this.cbProductWithoutBarcode.CheckedChanged += new System.EventHandler(this.cbProductWithoutBarcode_CheckedChanged);
-			// 
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "Kayıt Tarihi";
@@ -539,6 +532,25 @@
 			// 
 			this.columnHeader4.Text = "Açıklama";
 			this.columnHeader4.Width = 154;
+			// 
+			// lblProductName
+			// 
+			this.lblProductName.AutoSize = true;
+			this.lblProductName.Location = new System.Drawing.Point(52, 27);
+			this.lblProductName.Name = "lblProductName";
+			this.lblProductName.Size = new System.Drawing.Size(48, 13);
+			this.lblProductName.TabIndex = 6;
+			this.lblProductName.Text = "Ürün Adı";
+			// 
+			// btnUpdateProduct
+			// 
+			this.btnUpdateProduct.Location = new System.Drawing.Point(533, 427);
+			this.btnUpdateProduct.Name = "btnUpdateProduct";
+			this.btnUpdateProduct.Size = new System.Drawing.Size(122, 36);
+			this.btnUpdateProduct.TabIndex = 9;
+			this.btnUpdateProduct.Text = "Varlık Güncelle";
+			this.btnUpdateProduct.UseVisualStyleBackColor = true;
+			this.btnUpdateProduct.Click += new System.EventHandler(this.btnUpdateProduct_Click);
 			// 
 			// FrmVarlikBilgileri
 			// 
@@ -615,5 +627,6 @@
 		private System.Windows.Forms.ColumnHeader columnHeader2;
 		private System.Windows.Forms.ColumnHeader columnHeader3;
 		private System.Windows.Forms.ColumnHeader columnHeader4;
+		private System.Windows.Forms.Button btnUpdateProduct;
 	}
 }

@@ -15,7 +15,7 @@ namespace VarlikZimmetDepoYonetim.UI
 {
 	public partial class FrmVarliklar : Form
 	{
-		private UserRole userLogin = new UserRole();
+		private UserRole userRole = new UserRole();
 		private FrmVarlikBilgileri frmVarlikBilgileri;
 		private User user;
 		private List<TeamAssignment> teamAssignments;
@@ -23,31 +23,34 @@ namespace VarlikZimmetDepoYonetim.UI
 		private UserAssignment selectedUserAssignment;
 		private List<Product> products;
 		private Product selectedProduct;
+		private User loginUser;
+
 		public FrmVarliklar()
 		{
 			InitializeComponent();
 		}
 
-		public FrmVarliklar(UserRole userLogin) : this()
+
+		public FrmVarliklar(UserRole userRole, User loginUser) : this()
 		{
 			lblAllProducts.Enabled = false;
-			this.userLogin = userLogin;
+			this.userRole = userRole;
+			this.loginUser = loginUser;
 		}
 
 		private void FrmVarliklar_Load(object sender, EventArgs e)
 		{
-			if (userLogin.Role.RoleName == "PowerUser" || userLogin.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
+			if (userRole.Role.RoleName == "PowerUser" || userRole.Role.RoleName == "Depo Admin") lblAllProducts.Enabled = true;
 		}
 
 		private void lblTeamProducts_Click(object sender, EventArgs e)
 		{
 			lstProductList.Items.Clear();
 			TeamAssignmentDAL teamAssignmentDal = new TeamAssignmentDAL();
-			List<TeamAssignment> teamAssignments = teamAssignmentDal.Select(4);
-			int number = 1;
+			List<TeamAssignment> teamAssignments = teamAssignmentDal.Select(loginUser.UserId);
 			foreach (TeamAssignment teamAssignment in teamAssignments)
 			{
-				ListViewItem h1 = new ListViewItem(number++.ToString());
+				ListViewItem h1 = new ListViewItem(teamAssignment.TeamAssignmentId.ToString());
 				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.ProductBarcode.ToString());
 				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.ProductType.ToString());
 				h1.SubItems.Add(teamAssignment.InventoryAssignment.Product.Price.ToString());
@@ -80,11 +83,11 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			lstProductList.Items.Clear();
 			UserAssignmentDAL userAssignmentDal = new UserAssignmentDAL();
-			List<UserAssignment> userAssignments = userAssignmentDal.Select(2);
-			int number = 1;
+			List<UserAssignment> userAssignments = userAssignmentDal.Select(loginUser.UserId);
+			
 			foreach (UserAssignment userAssignment in userAssignments)
 			{
-				ListViewItem h1 = new ListViewItem(number++.ToString());
+				ListViewItem h1 = new ListViewItem(userAssignment.UserAssignmentId.ToString());
 				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.ProductBarcode.ToString());
 				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.ProductType.ToString());
 				h1.SubItems.Add(userAssignment.InventoryAssignment.Product.Price.ToString());
@@ -95,13 +98,10 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 		}
 
-		private void lstProductList_SelectedIndexChanged(object sender, EventArgs e)
-		{
-		}
 
 		private bool PowerUserRole()
 		{
-			return userLogin.Role.RoleName == "PowerUser";
+			return userRole.Role.RoleName == "PowerUser";
 		}
 
 		private void btnProductUpdate_Click(object sender, EventArgs e)

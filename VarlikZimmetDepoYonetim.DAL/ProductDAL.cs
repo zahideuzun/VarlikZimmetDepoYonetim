@@ -12,7 +12,7 @@ using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL
 {
-	public class ProductDAL : ISelectRepo<Product> , ISelectRepoId<Product>
+	public class ProductDAL : ISelectRepo<Product> , ISelectRepoId<Product>, IUpdateRepo<Product>
 	{
 		public List<Product> Select()
 		{
@@ -47,18 +47,19 @@ namespace VarlikZimmetDepoYonetim.DAL
 
 		public List<Product> Select(int id)
 		{
-			List<Product> updateProducts = null;
-			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ut.UrunTipiId [ürün tipi id] , ut.UrunTipiAdi [Ürün Tipi], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.GuncelFiyat [Güncel Fiyat] from Urun u\r\njoin UrunTipi ut on ut.UrunTipiId = u.UrunTipiId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.AktifMi = 'True' and u.UrunId = {id}");
+			List<Product> productsInfo = null;
+			SqlDbService sqlDbService = new SqlDbService($"select u.BarkodNo, ut.UrunTipiId [ürün tipi id] , ut.UrunTipiAdi [Ürün Tipi], m.MarkaId [marka id] ,\r\nm.MarkaAdi Marka,md.ModelId [model id], md.ModelAdi Model, \r\nIIF (u.GarantiliMi = 1 , 'Var','Yok') [Garanti Durumu]\r\n, u.Aciklama Açıklama , u.UrunGirisTarihi [Ürünün Giriş Tarihi] ,\r\nu.UrunMaliyeti [Ürün Maliyeti] ,p.ParaBirimiId [p birimi id] ,p.ParaBirimiAdi [Ürünün Para Birimi],\r\n f.GuncelFiyat [Güncel Fiyat], u.UrunId from Urun u\r\njoin UrunTipi ut on ut.UrunTipiId = u.UrunTipiId\r\njoin Marka m on m.MarkaId = u.MarkaId\r\njoin Model md on md.ModelId = u.ModelId\r\njoin Fiyat f on f.UrunId = u.UrunId\r\njoin ParaBirimi p on p.ParaBirimiId = f.ParaBirimiId where u.AktifMi = 'True' and u.UrunId = {id}");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 
 			if (reader.HasRows)
 			{
-				updateProducts = new List<Product>();
+				productsInfo = new List<Product>();
 				while (reader.Read())
 				{
 					Product product = new Product()
 					{
+						ProductId = reader.GetInt32(14),
 						ProductBarcode = reader.GetGuid(reader.GetOrdinal("BarkodNo")),
 						ProductType = new ProductType
 						{
@@ -87,13 +88,33 @@ namespace VarlikZimmetDepoYonetim.DAL
 
 						Price = Convert.ToDouble(reader.GetDecimal(13))
 					};
-					updateProducts.Add(product);
+					productsInfo.Add(product);
 				}
 
 			}
 			sqlDbService.Close();
-			return updateProducts;
+			return productsInfo;
 
+		}
+
+		public MyResult Update(Product updatedData)
+		{
+			SqlDbService sqlDbService = new SqlDbService("update Urun set \r\n GarantiliMi = @GarantiliMi, \r\n    Aciklama = @Aciklama \r\n where UrunId = @UrunId");
+			sqlDbService.Open();
+			List<SqlParameter> parameters = new List<SqlParameter>();
+			parameters.Add(new SqlParameter("@GarantiliMi", updatedData.IsWarrantyValid));
+			parameters.Add(new SqlParameter("@Aciklama", updatedData.Description));
+			parameters.Add(new SqlParameter("@UrunId", updatedData.ProductId));
+			sqlDbService.AddParameters(parameters.ToArray());
+			int rowAffected = sqlDbService.ExecuteNonQuery();
+
+			sqlDbService.Close();
+			return new MyResult()
+			{
+				Result = rowAffected,
+				ResultMessage = rowAffected > 0 ? "garanti durumu ve açıklama" : "hata var",
+				ResultType = rowAffected > 0
+			};
 		}
 	}
 }

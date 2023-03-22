@@ -16,7 +16,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		{
 			List<TeamAssignment> teamAssignments = null;
 
-			SqlDbService sqlDbService = new SqlDbService($"select  u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from EkipZimmet uz \r\n\t inner join Ekip e on uz.EkipId = e.EkipId\r\n\t inner join Zimmet z on uz.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunGrubu ug on u.UrunGrubuId= ug.UrunGrubuId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where uz.AktifMi = 'True' and uz.EkipId = {id}");
+			SqlDbService sqlDbService = new SqlDbService($"select  ez.EkipZimmetId [kayit no] ,u.BarkodNo, ut.UrunTipiAdi as [Ürün Tipi],fy.GuncelFiyat as Fiyat ,mr.MarkaAdi as Marka ,mdl.ModelAdi as Model  \r\n\t from EkipZimmet ez \r\n\t inner join Ekip e on ez.EkipId = e.EkipId\r\n\t inner join Zimmet z on ez.ZimmetId = z.ZimmetId\r\n\t inner join UrunDepo ud on z.UrunDepoId= ud.UrunDepoId\r\n\t inner join Urun u on ud.UrunId = u.UrunId\r\n\t inner join UrunTipi ut on u.UrunTipiId= ut.UrunTipiId\r\n\t inner join Fiyat fy on fy.UrunId = u.UrunId\r\n\t inner join Marka mr on mr.MarkaId = u.MarkaId\r\n\t inner join Model mdl on mdl.ModelId = u.ModelId where uz.AktifMi = 'True' and ez.EkipId = {id}");
 			sqlDbService.Open();
 			SqlDataReader reader = sqlDbService.ExReader();
 
@@ -25,17 +25,18 @@ namespace VarlikZimmetDepoYonetim.DAL
 				teamAssignments = new List<TeamAssignment>();
 				while (reader.Read())
 				{
-
 					TeamAssignment teamAssignment = new TeamAssignment();
 					teamAssignment.InventoryAssignment = new InventoryAssignment()
 					{
+						
 						Product = new Product()
 						{
+							ProductId = reader.GetInt32(0),
 							ProductBarcode = reader.GetGuid(reader.GetOrdinal("BarkodNo")),
-							ProductType = new ProductType() { ProductTypeName = reader.GetString(1) },
-							Price = Convert.ToDouble(reader.GetDecimal(2)),
-							Brand = new Brand() { BrandName = (reader.GetString(3)) },
-							Model = new Model() { ModelName = (reader.GetString(4)) }
+							ProductType = new ProductType() { ProductTypeName = reader.GetString(2) },
+							Price = Convert.ToDouble(reader.GetDecimal(3)),
+							Brand = new Brand() { BrandName = (reader.GetString(4)) },
+							Model = new Model() { ModelName = (reader.GetString(5)) }
 
 						}
 					};

@@ -19,6 +19,7 @@ namespace VarlikZimmetDepoYonetim.UI
 	{
 		private SqlProviderService sqlProviderService;
 		private FrmAnaSayfa frmAnaSayfa;
+		private User loginUser;
 		public FrmGirisEkrani()
 		{
 			InitializeComponent();
@@ -37,7 +38,8 @@ namespace VarlikZimmetDepoYonetim.UI
 			if (userRole != null)
 			{
 				MessageBox.Show("Login successful.");
-				FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa(userRole);
+				userRole.User = loginUser;
+				FrmAnaSayfa frmAnaSayfa = new FrmAnaSayfa(userRole,loginUser);
 				frmAnaSayfa.Show();
 			}
 			else

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VarlikZimmetDepoYonetim.DAL;
 
 namespace VarlikZimmetDepoYonetim.UI
 {
@@ -15,6 +16,17 @@ namespace VarlikZimmetDepoYonetim.UI
 		public FrmSSSorular()
 		{
 			InitializeComponent();
+		}
+
+		private void FrmSSSorular_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		void FormLoad()
+		{
+			QuestionDAL questionDal = new QuestionDAL();
+			questionDal.Select();
 		}
 	}
 }
