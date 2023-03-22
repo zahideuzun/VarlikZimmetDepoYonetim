@@ -9,9 +9,9 @@ namespace VarlikZimmetDepoYonetim.DTO
 	public abstract class BaseDTO
 	{
 		public DateTime? CreateDate { get; set; } = DateTime.Now;
-		public string CreatedBy { get; set; }
+		public int CreatedById { get; set; } = 1;
 		public DateTime? ModifiedDate { get; set; } = DateTime.Now;
-		public string ModifiedBy { get; set; }
+		public int ModifiedById { get; set; } = 1;
 		public bool IsAktive { get; set; } = true;
 	}
 }

@@ -50,9 +50,9 @@ namespace VarlikZimmetDepoYonetim.DAL
 			parameters.Add(new SqlParameter("@UrunId", insertedData.Product.ProductId));
 			parameters.Add(new SqlParameter("@GuncelFiyat", insertedData.CurrentPrice));
 			parameters.Add(new SqlParameter("@GuncellemeTarihi", DateTime.Now));
-			parameters.Add(new SqlParameter("@ParaBirimiId", insertedData.PriceId));
+			parameters.Add(new SqlParameter("@ParaBirimiId", insertedData.Currency.CurrencyId));
 			parameters.Add(new SqlParameter("@AktifMi", true));
-			
+
 			sqlDbService.AddParameters(parameters.ToArray());
 			int rowAffected = sqlDbService.ExecuteNonQuery();
 

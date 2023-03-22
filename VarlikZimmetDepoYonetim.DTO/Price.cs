@@ -13,6 +13,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public DateTime LastPriceUpdateDate { get; set; }
 		public Currency Currency { get; set; }
 		public Product Product { get; set; }
+		public override string ToString()
+		{
+			return CurrentPrice.ToString();
+		}
 	}
 
 }

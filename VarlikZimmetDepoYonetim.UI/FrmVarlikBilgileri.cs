@@ -25,13 +25,13 @@ namespace VarlikZimmetDepoYonetim.UI
 		List<Price> prices;
 		List<Currency> currencies;
 		List<Product> products;
-		List<Brand> brands;
 		List<ProductType> productTypes;
 		private ProductDAL productDal;
 		private CurrencyDAL currencyDAL;
 		private PriceDAL priceDAL;
 		private ProductTypeDAL productTypeDal;
 		private BrandDAL brandDal;
+		Product product;
 
 		#endregion
 
@@ -54,13 +54,13 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			if (cmbActions.SelectedItem == "Zimmet Ata")
 			{
-				zimmetAtama = new FrmZimmetAtama();
+				zimmetAtama = new FrmZimmetAtama(product.ProductId);
 				zimmetAtama.Show();
 			}
 
 			else if (cmbActions.SelectedItem == "Tüket")
 			{
-				tuket = new FrmTuket();
+				tuket = new FrmTuket(product.ProductId);
 				tuket.Show();
 			}
 			else MessageBox.Show("Bu sayfaya giriş yetkiniz yok!");
@@ -85,7 +85,7 @@ namespace VarlikZimmetDepoYonetim.UI
 			#endregion
 
 			ListViewItem h1 = new ListViewItem(selectedProduct.EntryDate.ToString());
-			h1.SubItems.Add(selectedProduct.CreatedBy = "Zahide Uzun");
+			//h1.SubItems.Add(selectedProduct.CreatedById.ToString() = "zahide");
 			//h1.SubItems.Add(selectedProduct.ProductStatus.ProductStatusName);
 			h1.SubItems.Add(selectedProduct.Description);
 			lstProductStatus.Items.Add(h1);
@@ -136,7 +136,7 @@ namespace VarlikZimmetDepoYonetim.UI
 			tbDescription.Text = products[0].Description;
 			tbProductCurrentPrice.Text = prices[0] .CurrentPrice.ToString();
 			cmbProductPriceCurrency.Items.AddRange(currencies.ToArray());
-			cmbProductPriceCurrency.SelectedItem = prices[0];
+			cmbProductPriceCurrency.SelectedItem = prices[0].Currency;
 			cmbProductPriceCurrency.Text = prices[0].Currency.CurrencyName;
 			cmbBrand.SelectedItem = products[0].Brand;
 			cmbBrand.Text = products[0].Brand.ToString();
@@ -164,7 +164,7 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		}
 
-		Product product;
+		
 		private void btnUpdateProduct_Click(object sender, EventArgs e)
 		{
 			
@@ -175,14 +175,15 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 			MyResult returnResult = productDal.Update(new Product()
 			{
-				ProductId = product[0].Id,
+				ProductId = product.ProductId,
 				IsWarrantyValid = IsWarrantyValid,
 				Description = tbDescription.Text
 			});
 			MyResult returnPriceResult = priceDAL.Insert(new Price()
 			{
-				CurrentPrice = Convert.ToDouble(tbProductCurrentPrice),
-				Currency = new Currency() {CurrencyId = cmbProductPriceCurrency.SelectedIndex}
+				CurrentPrice = double.Parse(tbProductCurrentPrice.Text),
+				Currency = new Currency() {CurrencyId = (cmbProductPriceCurrency.SelectedItem as Currency).CurrencyId},
+				Product = new Product() {ProductId = product.ProductId }
 				
 
 			});

@@ -57,6 +57,40 @@ namespace VarlikZimmetDepoYonetim.Provider
 		}
 
 
+		public void TransactionFoksiyonu()
+		{
+
+			Open();
+
+			SqlTransaction transaction = conn.BeginTransaction(); ;
+			foreach (SqlCommand command in sqlCommands)
+			{
+
+				command.Transaction = transaction;
+			}
+			try
+			{
+
+				foreach (SqlCommand command in sqlCommands)
+				{
+					command.ExecuteNonQuery();
+				}
+				transaction.Commit();
+			}
+			catch (Exception ex)
+			{
+				transaction?.Rollback();
+				Console.WriteLine("Transaction geri alındı." + ex.Message);
+			}
+			finally
+			{
+				Open();
+			}
+		}
+
+
+
+
 		public object ExecuteScalar()
 		{
 			return cmd.ExecuteScalar();

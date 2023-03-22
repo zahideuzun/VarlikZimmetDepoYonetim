@@ -33,7 +33,7 @@
 			this.tbDescription = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.btnConsume = new System.Windows.Forms.Button();
-			this.mtbSubscriberNo = new System.Windows.Forms.MaskedTextBox();
+			this.tbSubscriberNo = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -86,22 +86,21 @@
 			this.btnConsume.TabIndex = 5;
 			this.btnConsume.Text = "> Tüket";
 			this.btnConsume.UseVisualStyleBackColor = false;
+			this.btnConsume.Click += new System.EventHandler(this.btnConsume_Click);
 			// 
-			// mtbSubscriberNo
+			// tbSubscriberNo
 			// 
-			this.mtbSubscriberNo.Location = new System.Drawing.Point(47, 120);
-			this.mtbSubscriberNo.Mask = "00000000";
-			this.mtbSubscriberNo.Name = "mtbSubscriberNo";
-			this.mtbSubscriberNo.Size = new System.Drawing.Size(276, 20);
-			this.mtbSubscriberNo.TabIndex = 6;
-			this.mtbSubscriberNo.ValidatingType = typeof(int);
+			this.tbSubscriberNo.Location = new System.Drawing.Point(47, 121);
+			this.tbSubscriberNo.Name = "tbSubscriberNo";
+			this.tbSubscriberNo.Size = new System.Drawing.Size(276, 20);
+			this.tbSubscriberNo.TabIndex = 6;
 			// 
 			// FrmTuket
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(368, 450);
-			this.Controls.Add(this.mtbSubscriberNo);
+			this.Controls.Add(this.tbSubscriberNo);
 			this.Controls.Add(this.btnConsume);
 			this.Controls.Add(this.tbDescription);
 			this.Controls.Add(this.label3);
@@ -121,6 +120,6 @@
 		private System.Windows.Forms.TextBox tbDescription;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Button btnConsume;
-		private System.Windows.Forms.MaskedTextBox mtbSubscriberNo;
+		private System.Windows.Forms.TextBox tbSubscriberNo;
 	}
 }

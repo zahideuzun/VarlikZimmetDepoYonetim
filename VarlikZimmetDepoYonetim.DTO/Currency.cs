@@ -10,6 +10,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 	{
 		public int CurrencyId { get; set; }
 		public string CurrencyName { get; set; }
+		public override string ToString()
+		{
+			return CurrencyName;
+		}
 	}
 
 }

@@ -11,5 +11,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public int QuestionId { get; set; }
 		public string QuestionName { get; set; }
 		public string QuestionAnswer { get; set; }
+
+		public override string ToString()
+		{
+			return QuestionName;
+		}
 	}
 }

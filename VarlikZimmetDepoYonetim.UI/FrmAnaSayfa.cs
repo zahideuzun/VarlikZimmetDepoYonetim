@@ -17,6 +17,7 @@ namespace VarlikZimmetDepoYonetim.UI
 		private FrmVarlikBilgileri frmVarlikBilgileri;
 		private UserRole userRole;
 		private User loginUser;
+		private FrmSSSorular frmSsSorular;
 
 		public FrmAnaSayfa()
 		{
@@ -51,7 +52,9 @@ namespace VarlikZimmetDepoYonetim.UI
 
 		private void frequentlyAskedQuestionsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-
+			frmSsSorular = new FrmSSSorular();
+			frmSsSorular.MdiParent = this;
+			frmSsSorular.Show();
 		}
 	}
 }

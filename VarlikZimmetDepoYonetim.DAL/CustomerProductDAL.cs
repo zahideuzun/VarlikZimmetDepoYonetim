@@ -15,34 +15,24 @@ namespace VarlikZimmetDepoYonetim.DAL
 	{
 		public MyResult Insert(CustomerProduct insertedData)
 		{
-			#region MyRegion
+			SqlDbService sqlDbService = new SqlDbService("insert into MusteriUrun (UrunId, Aciklama,MusteriId,AktifMi) values (@UrunId, @Aciklama, @MusteriId, @AktifMi");
+			sqlDbService.Open();
+			List<SqlParameter> parameters = new List<SqlParameter>();
+			parameters.Add(new SqlParameter("@MusteriId", insertedData.Product.ProductId));
+			parameters.Add(new SqlParameter("@Aciklama", insertedData.Description));
+			parameters.Add(new SqlParameter("@UrunId", insertedData.Customer.CustomerId));
+			parameters.Add(new SqlParameter("@AktifMi", true));
+			sqlDbService.AddParameters(parameters.ToArray());
+			int rowAffected = sqlDbService.ExecuteNonQuery();
 
-			//CustomerProduct customerProduct = new CustomerProduct();
-			//SqlDbService sqlDbService = new SqlDbService($"select MusteriId from Musteri where MusteriAboneNo = @AboneNo");
-			//sqlDbService.Open();
+			sqlDbService.Close();
+			return new MyResult()
+			{
+				Result = rowAffected,
+				ResultMessage = rowAffected > 0 ? $"varlık {insertedData.Customer.CustomerName} {insertedData.Customer.CustomerSurname} adlı müşteriye atanmıştır. " : "Atama gerçekleşmedi. Lütfen abone numarasını kontrol ediniz!",
+				ResultType = rowAffected > 0
+			};
 
-			//List<SqlParameter> parameter = new List<SqlParameter>();
-			//parameter.Add(new SqlParameter("@AboneNo", customerProduct.Customer.CustomerSubscriberNo));
-			//sqlDbService.AddParameters(parameter.ToArray());
-			//int customerId = customerProduct.Customer.CustomerId;
-			//customerId = (int)sqlDbService.ExecuteScalar();
-
-
-			//SqlDbService sqlDbService1 =
-			//	new SqlDbService(
-			//		"INSERT INTO MusteriUrun(MusteriId, UrunId, Aciklama) VALUES(@MusteriId, @UrunId, @Aciklama)");
-			//List<SqlParameter> parameter1 = new List<SqlParameter>();
-			//parameter1.Add(new SqlParameter("@MusteriId", customerProduct.Customer.CustomerId));
-			//parameter1.Add(new SqlParameter("@UrunId", customerProduct.Product.ProductId.ToString()));
-			//parameter1.Add(new SqlParameter("@Aciklama", "tüketim"));
-			//sqlDbService.ExecuteNonQuery();
-
-			//sqlDbService.Close();
-
-			#endregion 
-
-
-			return new MyResult();
 		}
 	}
 }
