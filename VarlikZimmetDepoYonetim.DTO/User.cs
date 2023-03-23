@@ -16,6 +16,10 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public User Manager { get; set; }
 		public Team Team { get; set; }
 		public Company Company { get; set; }
+		public override string ToString()
+		{
+			return FirstName + " " + LastName;
+		}
 	}
 
 }

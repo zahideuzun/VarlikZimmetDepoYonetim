@@ -46,6 +46,8 @@
     <Compile Include="CurrencyDAL.cs" />
     <Compile Include="CustomerProductDAL.cs" />
     <Compile Include="InventoryAssignmentDAL.cs" />
+    <Compile Include="InventoryReasonDAL.cs" />
+    <Compile Include="InventoryTypeDAL.cs" />
     <Compile Include="IRepo\IDeleteRepo.cs" />
     <Compile Include="IRepo\IInsertRepo.cs" />
     <Compile Include="IRepo\ISelectRepo.cs" />
@@ -61,7 +63,9 @@
     <Compile Include="QuestionDAL.cs" />
     <Compile Include="ReportDAL\TeamAssignmentReportDAL.cs" />
     <Compile Include="TeamAssignmentDAL.cs" />
+    <Compile Include="TeamDAL.cs" />
     <Compile Include="UserAssignmentDAL.cs" />
+    <Compile Include="UserDAL.cs" />
     <Compile Include="UserLoginDAL.cs" />
   </ItemGroup>
   <ItemGroup>

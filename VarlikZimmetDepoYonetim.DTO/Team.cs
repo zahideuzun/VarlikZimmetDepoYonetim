@@ -12,7 +12,9 @@ namespace VarlikZimmetDepoYonetim.DTO
 			public string TeamName { get; set; }
 			public Company Company { get; set; }
 			public bool IsActive { get; set; }
-		
-
+			public override string ToString()
+			{
+				return TeamName;
+			}
 	}
 }

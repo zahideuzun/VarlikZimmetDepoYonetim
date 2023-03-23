@@ -22,7 +22,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 		{
 			SqlDbService sqlDbService =
 				new SqlDbService(
-					"insert into Zimmet(ZimmetNedeniId,ZimmetTuruId,UrunDepoId,Aciklama,AktifMi)\r\nvalues(@ZimmetNedeniId,@ZimmetTuruId,@UrunDepoId,@Aciklama,@AktifMi)");
+					"insert into Zimmet(ZimmetNedeniId,ZimmetTuruId,UrunDepoId,Aciklama,AktifMi, BaslangicTarihi,BitisTarihi)\r\nvalues(@ZimmetNedeniId,@ZimmetTuruId,@UrunDepoId,@Aciklama,@AktifMi, @BaslangicTarihi,@BitisTarihi)");
 
 			sqlDbService.Open();
 			List<SqlParameter> parameters = new List<SqlParameter>();
@@ -30,6 +30,8 @@ namespace VarlikZimmetDepoYonetim.DAL
 			parameters.Add(new SqlParameter("@ZimmetTuruId", insertedData.AssignmentType.InventoryTypeId));
 			parameters.Add(new SqlParameter("@UrunDepoId", insertedData.ProductWarehouse.ProductWarehouseId));
 			parameters.Add(new SqlParameter("@Aciklama", insertedData.Description));
+			parameters.Add(new SqlParameter("@BaslangicTarihi", insertedData.AssignmentStartDate));
+			parameters.Add(new SqlParameter("@BitisTarihi", insertedData.AssignmentEndDate));
 			parameters.Add(new SqlParameter("@AktifMi", true));
 
 			sqlDbService.AddParameters(parameters.ToArray());
@@ -39,7 +41,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 			return new MyResult()
 			{
 				Result = rowAffected,
-				ResultMessage = rowAffected > 0 ? "zimmet" : "hata",
+				ResultMessage = rowAffected > 0 ? "zimmete eklendi" : "hata",
 				ResultType = rowAffected > 0
 			};
 
@@ -54,6 +56,7 @@ namespace VarlikZimmetDepoYonetim.DAL
 			SqlDbService sqlDbService =
 				new SqlDbService(
 					"select Top(1) ZimmetId from Zimmet order by ZimmetId desc");
+			sqlDbService.Open();
 			return Convert.ToInt32(sqlDbService.ExecuteScalar());
 		}
 

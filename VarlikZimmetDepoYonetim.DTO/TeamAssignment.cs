@@ -11,8 +11,7 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public int TeamAssignmentId { get; set; }
 		public Team Team { get; set; }
 		public InventoryAssignment InventoryAssignment { get; set; }
-		public DateTime AssignmentStartDate { get; set; }
-		public DateTime AssignmentEndDate { get; set; }
+		
 	}
 
 }

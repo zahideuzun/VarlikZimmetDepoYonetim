@@ -14,6 +14,8 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public InventoryType AssignmentType { get; set; }
 		public string Description { get; set; }
 		public ProductWarehouse ProductWarehouse { get; set; }
+		public DateTime AssignmentStartDate { get; set; }
+		public DateTime AssignmentEndDate { get; set; }
 
 	}
 

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
 using VarlikZimmetDepoYonetim.Provider;
@@ -12,6 +9,11 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class ProductStatusDAL : ISelectRepoId<ProductStatus>
 	{
+		/// <summary>
+		/// ÜrünDurum tablosunun database baglantisini yaparak select sorgusuyla listeler.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<ProductStatus> Select(int id)
 		{
 			List<ProductStatus> status = null;

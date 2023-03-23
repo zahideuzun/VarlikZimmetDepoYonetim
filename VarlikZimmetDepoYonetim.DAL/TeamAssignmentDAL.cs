@@ -62,12 +62,11 @@ namespace VarlikZimmetDepoYonetim.DAL
 		/// <returns></returns>
 		public MyResult Insert(TeamAssignment insertedData)
 		{
-			SqlDbService sqlDbService = new SqlDbService("insert into EkipZimmet (EkipZimmetId, EkipId, ZimmetId, AktifMi)\r\nvalues (@EkipZimmetId, @EkipId, @ZimmetId, @AktifMi)");
+			SqlDbService sqlDbService = new SqlDbService("insert into EkipZimmet ( EkipId, ZimmetId, AktifMi)\r\nvalues (@EkipId, @ZimmetId, @AktifMi)");
 			sqlDbService.Open();
 			List<SqlParameter> parameters = new List<SqlParameter>();
-			parameters.Add(new SqlParameter("@UrunId", insertedData.TeamAssignmentId));
-			parameters.Add(new SqlParameter("@GuncelFiyat", insertedData.Team.TeamId));
-			parameters.Add(new SqlParameter("@ParaBirimiId", insertedData.InventoryAssignment.InventoryAssignmentId));
+			parameters.Add(new SqlParameter("@EkipId", insertedData.Team.TeamId));
+			parameters.Add(new SqlParameter("@ZimmetId", insertedData.InventoryAssignment.InventoryAssignmentId));
 			parameters.Add(new SqlParameter("@AktifMi", true));
 
 			sqlDbService.AddParameters(parameters.ToArray());

@@ -11,5 +11,9 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public int InventoryReasonId { get; set; }
 		public string InventoryReasonName { get; set; }
 
+		public override string ToString()
+		{
+			return InventoryReasonName;
+		}
 	}
 }
