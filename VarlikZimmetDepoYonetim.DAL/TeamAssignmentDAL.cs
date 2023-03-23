@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
+using VarlikZimmetDepoYonetim.DTO.Result;
 using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL
 {
-	public class TeamAssignmentDAL : ISelectRepoId<TeamAssignment>
+	public class TeamAssignmentDAL : ISelectRepoId<TeamAssignment> , IInsertRepo<TeamAssignment>
 	{
+		
+
 		/// <summary>
 		/// Giriş yapan kullanıcının ekip idsine göre ekibine zimmetlenmis ürünleri getiren select metodu.
 		/// </summary>
@@ -50,6 +53,33 @@ namespace VarlikZimmetDepoYonetim.DAL
 			}
 			sqlDbService.Close();
 			return teamAssignments;
+		}
+
+		/// <summary>
+		/// ekip zimmet tablosuna yeni bir zimmet atamasi yapan metot.
+		/// </summary>
+		/// <param name="insertedData"></param>
+		/// <returns></returns>
+		public MyResult Insert(TeamAssignment insertedData)
+		{
+			SqlDbService sqlDbService = new SqlDbService("insert into EkipZimmet (EkipZimmetId, EkipId, ZimmetId, AktifMi)\r\nvalues (@EkipZimmetId, @EkipId, @ZimmetId, @AktifMi)");
+			sqlDbService.Open();
+			List<SqlParameter> parameters = new List<SqlParameter>();
+			parameters.Add(new SqlParameter("@UrunId", insertedData.TeamAssignmentId));
+			parameters.Add(new SqlParameter("@GuncelFiyat", insertedData.Team.TeamId));
+			parameters.Add(new SqlParameter("@ParaBirimiId", insertedData.InventoryAssignment.InventoryAssignmentId));
+			parameters.Add(new SqlParameter("@AktifMi", true));
+
+			sqlDbService.AddParameters(parameters.ToArray());
+			int rowAffected = sqlDbService.ExecuteNonQuery();
+
+			sqlDbService.Close();
+			return new MyResult()
+			{
+				Result = rowAffected,
+				ResultMessage = rowAffected > 0 ? "ekip zimmet" : "hata",
+				ResultType = rowAffected > 0
+			};
 		}
 	}
 }

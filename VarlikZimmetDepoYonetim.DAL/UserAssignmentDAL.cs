@@ -6,12 +6,40 @@ using System.Text;
 using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
+using VarlikZimmetDepoYonetim.DTO.Result;
 using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL
 {
-	public class UserAssignmentDAL : ISelectRepoId<UserAssignment>
+	public class UserAssignmentDAL : ISelectRepoId<UserAssignment>, IInsertRepo<UserAssignment>
 	{
+		/// <summary>
+		/// Kullanici zimmet tablosuna yeni bir zimmet atamasi yapan insert sorgusu.
+		/// </summary>
+		/// <param name="insertedData"></param>
+		/// <returns></returns>
+		public MyResult Insert(UserAssignment insertedData)
+		{
+			SqlDbService sqlDbService = new SqlDbService("insert into KullaniciZimmet (KullaniciZimmetId, KullaniciId, ZimmetId, AktifMi)\r\nvalues (@KullaniciZimmetId, @KullaniciId, @ZimmetId, @AktifMi)");
+			sqlDbService.Open();
+			List<SqlParameter> parameters = new List<SqlParameter>();
+			parameters.Add(new SqlParameter("@UrunId", insertedData.UserAssignmentId));
+			parameters.Add(new SqlParameter("@GuncelFiyat", insertedData.User.UserId));
+			parameters.Add(new SqlParameter("@ParaBirimiId", insertedData.InventoryAssignment.InventoryAssignmentId));
+			parameters.Add(new SqlParameter("@AktifMi", true));
+
+			sqlDbService.AddParameters(parameters.ToArray());
+			int rowAffected = sqlDbService.ExecuteNonQuery();
+
+			sqlDbService.Close();
+			return new MyResult()
+			{
+				Result = rowAffected,
+				ResultMessage = rowAffected > 0 ? "kullanıcı zimmet" : "hata",
+				ResultType = rowAffected > 0
+			};
+		}
+
 		/// <summary>
 		/// Giris yapan kullanicinin kendisine zimmetlenmis ürünlerini kullanıcı zimmet tablosundan kullanıcı zimmet idsine göre getiren select metodu
 		/// </summary>

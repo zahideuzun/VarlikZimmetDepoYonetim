@@ -13,6 +13,11 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class CustomerProductDAL : IInsertRepo<CustomerProduct>
 	{
+		/// <summary>
+		/// müsteri ürün tablosuna veri ekleyen (tüketme işlemi) insert sorgusu metodu.
+		/// </summary>
+		/// <param name="insertedData"></param>
+		/// <returns></returns>
 		public MyResult Insert(CustomerProduct insertedData)
 		{
 			SqlDbService sqlDbService = new SqlDbService("insert into MusteriUrun (UrunId, Aciklama,MusteriId,AktifMi) values (@UrunId, @Aciklama, @MusteriId, @AktifMi)");

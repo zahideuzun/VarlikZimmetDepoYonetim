@@ -13,6 +13,7 @@ namespace VarlikZimmetDepoYonetim.DTO
 		public InventoryReason AssignmentReason { get; set; }
 		public InventoryType AssignmentType { get; set; }
 		public string Description { get; set; }
+		public ProductWarehouse ProductWarehouse { get; set; }
 
 	}
 

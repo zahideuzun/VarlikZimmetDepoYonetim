@@ -13,18 +13,51 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class InventoryAssignmentDAL : IInsertRepo<InventoryAssignment>
 	{
+		/// <summary>
+		/// yeni bir zimmet atama sorgusunu gerceklestiren metot.
+		/// </summary>
+		/// <param name="insertedData"></param>
+		/// <returns></returns>
 		public MyResult Insert(InventoryAssignment insertedData)
 		{
-			SqlDbService sqlDbService = new SqlDbService("select u.UrunId as [Kayıt Numarası], u.BarkodNo, ug.UrunGrubuAdi as [Ürün Tipi], f.GuncelFiyat as [Ürünün Güncel Fiyatı], mr.MarkaAdi as Marka, mo.ModelAdi as Model from Urun u \r\n\t join UrunGrubu ug on u.UrunGrubuId = ug.UrunGrubuId\r\n\t join Marka mr on mr.MarkaId = u.MarkaId\r\n\t join Model mo on mo.ModelId = u.ModelId\r\n\t join Fiyat f on f.UrunId = u.UrunId");
+			SqlDbService sqlDbService =
+				new SqlDbService(
+					"insert into Zimmet(ZimmetNedeniId,ZimmetTuruId,UrunDepoId,Aciklama,AktifMi)\r\nvalues(@ZimmetNedeniId,@ZimmetTuruId,@UrunDepoId,@Aciklama,@AktifMi)");
 
+			sqlDbService.Open();
+			List<SqlParameter> parameters = new List<SqlParameter>();
+			parameters.Add(new SqlParameter("@ZimmetNedeniId", insertedData.AssignmentReason.InventoryReasonId));
+			parameters.Add(new SqlParameter("@ZimmetTuruId", insertedData.AssignmentType.InventoryTypeId));
+			parameters.Add(new SqlParameter("@UrunDepoId", insertedData.ProductWarehouse.ProductWarehouseId));
+			parameters.Add(new SqlParameter("@Aciklama", insertedData.Description));
+			parameters.Add(new SqlParameter("@AktifMi", true));
 
+			sqlDbService.AddParameters(parameters.ToArray());
+			int rowAffected = sqlDbService.ExecuteNonQuery();
 
+			sqlDbService.Close();
+			return new MyResult()
+			{
+				Result = rowAffected,
+				ResultMessage = rowAffected > 0 ? "zimmet" : "hata",
+				ResultType = rowAffected > 0
+			};
 
-			return new MyResult();
 		}
-
 		
+		/// <summary>
+		/// en son eklenen zimmetin idsini getiren metot.
+		/// </summary>
+		/// <returns></returns>
+		public int InventoryAssignmentId()
+		{
+			SqlDbService sqlDbService =
+				new SqlDbService(
+					"select Top(1) ZimmetId from Zimmet order by ZimmetId desc");
+			return Convert.ToInt32(sqlDbService.ExecuteScalar());
 		}
 
 	}
+
+}
 
