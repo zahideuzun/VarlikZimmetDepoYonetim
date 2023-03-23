@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
 using VarlikZimmetDepoYonetim.DTO.Result;
@@ -13,8 +10,6 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class TeamAssignmentDAL : ISelectRepoId<TeamAssignment> , IInsertRepo<TeamAssignment>
 	{
-		
-
 		/// <summary>
 		/// Giriş yapan kullanıcının ekip idsine göre ekibine zimmetlenmis ürünleri getiren select metodu.
 		/// </summary>

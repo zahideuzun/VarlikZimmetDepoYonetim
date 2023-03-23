@@ -94,6 +94,7 @@
 			// 
 			// cmbInventoryReason
 			// 
+			this.cmbInventoryReason.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbInventoryReason.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
 			this.cmbInventoryReason.FormattingEnabled = true;
 			this.cmbInventoryReason.Location = new System.Drawing.Point(38, 121);
@@ -103,6 +104,7 @@
 			// 
 			// cmbInventoryType
 			// 
+			this.cmbInventoryType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbInventoryType.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
 			this.cmbInventoryType.FormattingEnabled = true;
 			this.cmbInventoryType.Location = new System.Drawing.Point(37, 169);
@@ -173,6 +175,7 @@
 			// 
 			// cmbInventoryPerson
 			// 
+			this.cmbInventoryPerson.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cmbInventoryPerson.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
 			this.cmbInventoryPerson.FormattingEnabled = true;
 			this.cmbInventoryPerson.Location = new System.Drawing.Point(38, 73);

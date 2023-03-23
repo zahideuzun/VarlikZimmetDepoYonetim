@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.tb = new System.Windows.Forms.TextBox();
 			this.lblMyProducts = new System.Windows.Forms.Label();
 			this.lblTeamProducts = new System.Windows.Forms.Label();
 			this.lblAllProducts = new System.Windows.Forms.Label();
@@ -42,24 +41,17 @@
 			this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.btnProductUpdate = new System.Windows.Forms.Button();
 			this.pbQuestions = new System.Windows.Forms.PictureBox();
 			this.pbAnnouncement = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.groupBox1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbQuestions)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAnnouncement)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// tb
-			// 
-			this.tb.Location = new System.Drawing.Point(257, 502);
-			this.tb.Name = "tb";
-			this.tb.Size = new System.Drawing.Size(156, 20);
-			this.tb.TabIndex = 0;
 			// 
 			// lblMyProducts
 			// 
@@ -175,6 +167,16 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = ".";
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.Screenshot_28;
+			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(152, 546);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+			this.pictureBox1.TabIndex = 2;
+			this.pictureBox1.TabStop = false;
+			// 
 			// btnProductUpdate
 			// 
 			this.btnProductUpdate.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -218,16 +220,6 @@
 			this.pictureBox2.TabIndex = 13;
 			this.pictureBox2.TabStop = false;
 			// 
-			// pictureBox1
-			// 
-			this.pictureBox1.Image = global::VarlikZimmetDepoYonetim.UI.Properties.Resources.Screenshot_28;
-			this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-			this.pictureBox1.Name = "pictureBox1";
-			this.pictureBox1.Size = new System.Drawing.Size(152, 546);
-			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-			this.pictureBox1.TabIndex = 2;
-			this.pictureBox1.TabStop = false;
-			// 
 			// FrmVarliklar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,23 +237,20 @@
 			this.Controls.Add(this.lblTeamProducts);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.lblMyProducts);
-			this.Controls.Add(this.tb);
 			this.Name = "FrmVarliklar";
 			this.Text = "FrmVarliklar";
 			this.Load += new System.EventHandler(this.FrmVarliklar_Load);
 			this.groupBox1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbQuestions)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbAnnouncement)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private System.Windows.Forms.TextBox tb;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label lblMyProducts;
 		private System.Windows.Forms.Label lblTeamProducts;

@@ -28,31 +28,33 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.treeAnnouncement = new System.Windows.Forms.TreeView();
 			this.SuspendLayout();
 			// 
-			// treeView1
+			// treeAnnouncement
 			// 
-			this.treeView1.Location = new System.Drawing.Point(12, 178);
-			this.treeView1.Name = "treeView1";
-			this.treeView1.Scrollable = false;
-			this.treeView1.Size = new System.Drawing.Size(432, 97);
-			this.treeView1.TabIndex = 0;
+			this.treeAnnouncement.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.treeAnnouncement.Location = new System.Drawing.Point(0, 12);
+			this.treeAnnouncement.Name = "treeAnnouncement";
+			this.treeAnnouncement.Scrollable = false;
+			this.treeAnnouncement.Size = new System.Drawing.Size(617, 355);
+			this.treeAnnouncement.TabIndex = 0;
 			// 
 			// FrmDuyurular
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(617, 367);
-			this.Controls.Add(this.treeView1);
+			this.Controls.Add(this.treeAnnouncement);
 			this.Name = "FrmDuyurular";
 			this.Text = "FrmDuyurular";
+			this.Load += new System.EventHandler(this.FrmDuyurular_Load);
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.TreeView treeView1;
+		private System.Windows.Forms.TreeView treeAnnouncement;
 	}
 }

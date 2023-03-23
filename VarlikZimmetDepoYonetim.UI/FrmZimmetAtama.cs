@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VarlikZimmetDepoYonetim.DAL;
 using VarlikZimmetDepoYonetim.DTO;
@@ -42,42 +36,58 @@ namespace VarlikZimmetDepoYonetim.UI
 			this.products = product;
 		}
 
+		/// <summary>
+		/// formun loadinda yuklenecek bilgileri getirir.
+		/// </summary>
 		void FormLoad()
 		{
 			cmbInventoryReason.Items.AddRange(inventoryReasonDal.Select().ToArray());
 			cmbInventoryType.Items.AddRange(inventoryTypeDal.Select().ToArray());
 			cmbInventoryPerson.Enabled = false;
 		}
+
+		/// <summary>
+		/// zimmet atamasini yapan event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnInvertoryAdd_Click(object sender, EventArgs e)
 		{
-			inventoryAssignmentDal = new InventoryAssignmentDAL();
-			productWarehouseDal = new ProductWarehouseDAL();
-			productWarehouses.AddRange(productWarehouseDal.Select(products));
-			InventoryAssignment insertedInventoryAssignment = new InventoryAssignment()
+			if (DateControl())
 			{
-				AssignmentReason = new InventoryReason()
+				inventoryAssignmentDal = new InventoryAssignmentDAL();
+				productWarehouseDal = new ProductWarehouseDAL();
+				productWarehouses.AddRange(productWarehouseDal.Select(products));
+				InventoryAssignment insertedInventoryAssignment = new InventoryAssignment()
 				{
-					InventoryReasonId = (cmbInventoryReason.SelectedItem as InventoryReason).InventoryReasonId,
-				},
-				AssignmentType = new InventoryType()
-				{
-					InventoryTypeId = (cmbInventoryType.SelectedItem as InventoryType).InventoryTypeId,
-				},
-				ProductWarehouse = new ProductWarehouse()
-				{
-					Product = new Product()
+					AssignmentReason = new InventoryReason()
 					{
-						ProductId = products
+						InventoryReasonId = (cmbInventoryReason.SelectedItem as InventoryReason).InventoryReasonId,
 					},
-					ProductWarehouseId = productWarehouses[0].ProductWarehouseId
-				},
-				Description = tbDescription.Text,
-				AssignmentStartDate = dtpInventoryEntry.Value,
-				AssignmentEndDate = dtpInventoryEnd.Value
-			};
-			inventoryAssignmentDal.Insert(insertedInventoryAssignment);
-			insertedInventory = inventoryAssignmentDal.InventoryAssignmentId();
-			InventoryAssignmentAdd(insertedInventory);
+					AssignmentType = new InventoryType()
+					{
+						InventoryTypeId = (cmbInventoryType.SelectedItem as InventoryType).InventoryTypeId,
+					},
+					ProductWarehouse = new ProductWarehouse()
+					{
+						Product = new Product()
+						{
+							ProductId = products
+						},
+						ProductWarehouseId = productWarehouses[0].ProductWarehouseId
+					},
+					Description = tbDescription.Text,
+					AssignmentStartDate = dtpInventoryEntry.Value,
+					AssignmentEndDate = dtpInventoryEnd.Value
+				};
+				inventoryAssignmentDal.Insert(insertedInventoryAssignment);
+				insertedInventory = inventoryAssignmentDal.InventoryAssignmentId();
+				InventoryAssignmentAdd(insertedInventory);
+			}
+			else
+			{
+				MessageBox.Show("Zimmet başlangıç tarihi bitiş tarihinden daha kücük olamaz");
+			}
 		}
 
 		private MyResult result;
@@ -129,6 +139,11 @@ namespace VarlikZimmetDepoYonetim.UI
 			FormLoad();
 		}
 
+		/// <summary>
+		/// seçilen zimmet atanacak tipe göre zimmet atamasi yapilacak kisi ya da ekibin gelecegi comboboxi doldurur.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void cmbInventoryType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			cmbInventoryPerson.Enabled = true;
@@ -142,6 +157,15 @@ namespace VarlikZimmetDepoYonetim.UI
 				cmbInventoryPerson.Items.AddRange(teamDal.Select().ToArray());
 			}
 
+		}
+
+		/// <summary>
+		/// çıkış tarihi ve giriş tarihi arasındaki farkı bakar
+		/// </summary>
+		/// <returns></returns>
+		public bool DateControl()
+		{
+			return dtpInventoryEntry.Value < dtpInventoryEnd.Value;
 		}
 	}
 }

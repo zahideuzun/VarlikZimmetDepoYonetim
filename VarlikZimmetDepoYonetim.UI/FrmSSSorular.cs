@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VarlikZimmetDepoYonetim.DAL;
 using VarlikZimmetDepoYonetim.DTO;
@@ -25,6 +19,9 @@ namespace VarlikZimmetDepoYonetim.UI
 			FormLoad();
 		}
 
+		/// <summary>
+		/// formun loadinda yuklenecek olan soru bilgilerini getirir.
+		/// </summary>
 		void FormLoad()
 		{
 			QuestionDAL questionDal = new QuestionDAL();

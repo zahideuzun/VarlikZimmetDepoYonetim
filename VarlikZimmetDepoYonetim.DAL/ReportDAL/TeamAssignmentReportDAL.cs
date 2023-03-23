@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
 using VarlikZimmetDepoYonetim.Provider;
 
 namespace VarlikZimmetDepoYonetim.DAL.ReportDAL
 {
-	/// <summary>
-	/// 
-	/// </summary>
 	public class TeamAssignmentReportDAL : ISelectRepoId<TeamAssignment>
 	{
+		/// <summary>
+		/// istenen sirketteki ekiplere göre ekiplere zimmetlenmis aktif varliklari listeleyen select metodu.
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public List<TeamAssignment> Select(int id)
 		{
 			List<TeamAssignment> teamAssignments = null;
@@ -34,11 +32,8 @@ namespace VarlikZimmetDepoYonetim.DAL.ReportDAL
 						Product = new Product()
 						{
 							ProductBarcode = reader.GetGuid(reader.GetOrdinal("BarkodNo")),
-							ProductType = new ProductType() { ProductTypeName = reader.GetString(2) },
-							Price = Convert.ToDouble(reader.GetDecimal(3)),
-							Brand = new Brand() { BrandName = (reader.GetString(4)) },
-							Model = new Model() { ModelName = (reader.GetString(5)) }
-
+							Brand = new Brand() { BrandName = (reader.GetString(3)) },
+							Model = new Model() { ModelName = (reader.GetString(4)) }
 						}
 
 					};
@@ -53,8 +48,8 @@ namespace VarlikZimmetDepoYonetim.DAL.ReportDAL
 						
 					};
 					
-
-					teamAssignment.TeamAssignmentId = reader.GetInt32(0);
+					teamAssignment.InventoryAssignment.AssignmentStartDate = reader.GetDateTime(5);
+					teamAssignment.InventoryAssignment.AssignmentEndDate = reader.GetDateTime(6);
 					teamAssignments.Add(teamAssignment);
 				}
 			}

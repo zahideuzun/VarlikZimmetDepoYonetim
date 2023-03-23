@@ -31,10 +31,11 @@
 			this.menuStrip2 = new System.Windows.Forms.MenuStrip();
 			this.varlıkDepoYönetimiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.allProductsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.updateProductsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.raporlamaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.announcementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.frequentlyAskedQuestionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.firstReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.secondReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip2.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -54,8 +55,7 @@
 			// varlıkDepoYönetimiToolStripMenuItem
 			// 
 			this.varlıkDepoYönetimiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.allProductsListToolStripMenuItem,
-            this.updateProductsToolStripMenuItem});
+            this.allProductsListToolStripMenuItem});
 			this.varlıkDepoYönetimiToolStripMenuItem.Name = "varlıkDepoYönetimiToolStripMenuItem";
 			this.varlıkDepoYönetimiToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
 			this.varlıkDepoYönetimiToolStripMenuItem.Text = "Varlık-Depo Yönetimi";
@@ -67,15 +67,11 @@
 			this.allProductsListToolStripMenuItem.Text = "Tüm Varlıklar";
 			this.allProductsListToolStripMenuItem.Click += new System.EventHandler(this.allProductsListToolStripMenuItem_Click);
 			// 
-			// updateProductsToolStripMenuItem
-			// 
-			this.updateProductsToolStripMenuItem.Name = "updateProductsToolStripMenuItem";
-			this.updateProductsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-			this.updateProductsToolStripMenuItem.Text = "Varlık Güncelle";
-			this.updateProductsToolStripMenuItem.Click += new System.EventHandler(this.updateProductsToolStripMenuItem_Click);
-			// 
 			// raporlamaToolStripMenuItem
 			// 
+			this.raporlamaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.firstReportToolStripMenuItem,
+            this.secondReportToolStripMenuItem});
 			this.raporlamaToolStripMenuItem.Name = "raporlamaToolStripMenuItem";
 			this.raporlamaToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
 			this.raporlamaToolStripMenuItem.Text = "Raporlama";
@@ -93,6 +89,20 @@
 			this.frequentlyAskedQuestionsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
 			this.frequentlyAskedQuestionsToolStripMenuItem.Text = "Sık Sorulan Sorular";
 			this.frequentlyAskedQuestionsToolStripMenuItem.Click += new System.EventHandler(this.frequentlyAskedQuestionsToolStripMenuItem_Click);
+			// 
+			// firstReportToolStripMenuItem
+			// 
+			this.firstReportToolStripMenuItem.Name = "firstReportToolStripMenuItem";
+			this.firstReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.firstReportToolStripMenuItem.Text = "Rapor-1";
+			this.firstReportToolStripMenuItem.Click += new System.EventHandler(this.firstReportToolStripMenuItem_Click);
+			// 
+			// secondReportToolStripMenuItem
+			// 
+			this.secondReportToolStripMenuItem.Name = "secondReportToolStripMenuItem";
+			this.secondReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.secondReportToolStripMenuItem.Text = "Rapor-2";
+			this.secondReportToolStripMenuItem.Click += new System.EventHandler(this.secondReportToolStripMenuItem_Click);
 			// 
 			// FrmAnaSayfa
 			// 
@@ -118,9 +128,10 @@
 		private System.Windows.Forms.ToolStripMenuItem varlıkDepoYönetimiToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem allProductsListToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem raporlamaToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem updateProductsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem announcementsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem frequentlyAskedQuestionsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem firstReportToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem secondReportToolStripMenuItem;
 	}
 }
 	

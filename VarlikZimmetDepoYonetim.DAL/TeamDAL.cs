@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VarlikZimmetDepoYonetim.DAL.IRepo;
 using VarlikZimmetDepoYonetim.DTO;
 using VarlikZimmetDepoYonetim.Provider;
@@ -12,6 +8,10 @@ namespace VarlikZimmetDepoYonetim.DAL
 {
 	public class TeamDAL : ISelectRepo<Team>
 	{
+		/// <summary>
+		/// databasedeki ekip tablosunu select sorgusuyla listeleyen metot.
+		/// </summary>
+		/// <returns></returns>
 		public List<Team> Select()
 		{
 			List<Team> teams = null;

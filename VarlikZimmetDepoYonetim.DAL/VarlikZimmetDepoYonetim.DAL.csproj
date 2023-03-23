@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AnnouncementDAL.cs" />
     <Compile Include="BrandDAL.cs" />
+    <Compile Include="CompanyDAL.cs" />
     <Compile Include="CurrencyDAL.cs" />
     <Compile Include="CustomerProductDAL.cs" />
     <Compile Include="InventoryAssignmentDAL.cs" />

@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using VarlikZimmetDepoYonetim.DAL;
 using VarlikZimmetDepoYonetim.DTO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace VarlikZimmetDepoYonetim.UI
 {
@@ -30,7 +24,6 @@ namespace VarlikZimmetDepoYonetim.UI
 		{
 			InitializeComponent();
 		}
-
 
 		public FrmVarliklar(UserRole userRole) : this()
 		{
@@ -114,12 +107,20 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 		}
 
-
+		/// <summary>
+		/// giriş yapan kullanıcı rollerinden power user rolü kontrol eder. 
+		/// </summary>
+		/// <returns></returns>
 		private bool PowerUserRole()
 		{
 			return userRole.Role.RoleName == "PowerUser";
 		}
 
+		/// <summary>
+		/// seçilen varlığın güncelleme sayfasına yönlendirir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnProductUpdate_Click(object sender, EventArgs e)
 		{
 			//SelectedItems[0] yani seçtiğimiz itemsin indeksini bize döndürür. Bir adet değer seçtiğimizden dolayı 0 veririz.
@@ -156,12 +157,22 @@ namespace VarlikZimmetDepoYonetim.UI
 			}
 		}
 
+		/// <summary>
+		/// duyurular ekranına yönlendirir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void pbAnnouncement_Click(object sender, EventArgs e)
 		{
 			FrmDuyurular frmDuyurular = new FrmDuyurular();
 			frmDuyurular.Show();
 		}
 
+		/// <summary>
+		/// sık sorulan sorular ekranına yönlendirir.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void pbQuestions_Click(object sender, EventArgs e)
 		{
 			FrmSSSorular frmSsSorular = new FrmSSSorular();
